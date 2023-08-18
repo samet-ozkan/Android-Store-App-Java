@@ -10,11 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.sametozkan.storeapp.MyApplication;
 import com.sametozkan.storeapp.R;
 import com.sametozkan.storeapp.databinding.FragmentHomeBinding;
 import com.sametozkan.storeapp.domain.model.Product;
+import com.sametozkan.storeapp.presentation.ViewModelFactory;
 import com.sametozkan.storeapp.presentation.home.adapter.ProductAdapter;
 
 import java.util.List;
@@ -26,12 +29,15 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
 
     @Inject
-    HomeViewModel homeViewModel;
+    ViewModelFactory viewModelFactory;
+
+    private HomeViewModel homeViewModel;
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         ((MyApplication) context.getApplicationContext()).getAppComponent().inject(this);
+        homeViewModel = new ViewModelProvider(this, viewModelFactory).get(HomeViewModel.class);
     }
 
     @Nullable

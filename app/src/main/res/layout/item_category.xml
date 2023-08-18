@@ -58,7 +58,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:setAdapter="@{adapter}"
             app:submitList="@{list}"
-            tools:listitem="@layout/product_item" />
+            tools:listitem="@layout/item_product" />
 
     </LinearLayout>
 </layout>

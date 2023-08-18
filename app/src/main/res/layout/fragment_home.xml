@@ -20,27 +20,27 @@
 
             <include
                 android:id="@+id/mensClothing"
-                layout="@layout/category_item"
+                layout="@layout/item_category"
                 categoryName="@{`Men's Clothing`}"
                 list="@{viewModel.mensClothingList}"/>
 
             <include
                 android:id="@+id/womensClothing"
-                layout="@layout/category_item"
+                layout="@layout/item_category"
                 categoryName="@{`Women's Clothing`}"
                 list="@{viewModel.womensClothingList}"
                 />
 
             <include
                 android:id="@+id/jewelery"
-                layout="@layout/category_item"
+                layout="@layout/item_category"
                 categoryName="@{`Jewelery`}"
                 list="@{viewModel.jeweleryList}"
                 />
 
             <include
                 android:id="@+id/electronics"
-                layout="@layout/category_item"
+                layout="@layout/item_category"
                 categoryName="@{`Electronics`}"
                 list="@{viewModel.electronicsList}"
                 />

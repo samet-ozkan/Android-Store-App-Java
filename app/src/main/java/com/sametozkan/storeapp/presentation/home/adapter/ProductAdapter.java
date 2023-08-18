@@ -6,9 +6,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
-
+import com.sametozkan.storeapp.databinding.ItemProductBinding;
 import com.sametozkan.storeapp.R;
-import com.sametozkan.storeapp.databinding.ProductItemBinding;
 import com.sametozkan.storeapp.domain.model.Product;
 
 import java.util.List;
@@ -25,9 +24,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @NonNull
     @Override
     public ProductAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        final ProductItemBinding binding = DataBindingUtil.inflate(
+        final ItemProductBinding binding = DataBindingUtil.inflate(
                 LayoutInflater.from(parent.getContext()),
-                R.layout.product_item, parent, false);
+                R.layout.item_product, parent, false);
         return new ViewHolder(binding);
     }
 
@@ -44,9 +43,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        private ProductItemBinding binding;
+        private ItemProductBinding binding;
 
-        public ViewHolder(@NonNull ProductItemBinding binding) {
+        public ViewHolder(@NonNull ItemProductBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
