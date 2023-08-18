@@ -44,4 +44,9 @@ public class ProductRepositoryImpl implements ProductRepository {
     public Observable<List<Product>> getProductsByCategory(String category) {
         return apiService.getProductsByCategory(category).map(ProductMapper::toProductList);
     }
+
+    @Override
+    public Observable<List<Product>> getLimitedProductsByCategory(String category, int count) {
+        return apiService.getLimitedProductsByCategory(category, count).map(ProductMapper::toProductList);
+    }
 }

@@ -17,4 +17,7 @@ public interface ProductRepository {
     Single<Product> getProductById(int productId);
 
     Observable<List<Product>> getProductsByCategory(String category);
+
+    Observable<List<Product>> getLimitedProductsByCategory(String category, int count);
+
 }

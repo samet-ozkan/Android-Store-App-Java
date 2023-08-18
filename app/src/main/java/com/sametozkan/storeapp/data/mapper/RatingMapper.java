@@ -7,15 +7,15 @@ public class RatingMapper {
 
     public static Rating toRating(RatingDTO ratingDTO){
         Rating rating = new Rating();
-        rating.setRate(rating.getRate());
-        rating.setCount(rating.getCount());
+        rating.setRate(ratingDTO.getRate());
+        rating.setCount(ratingDTO.getCount());
         return rating;
     }
 
     public static RatingDTO toRatingDTO(Rating rating){
         RatingDTO ratingDTO = new RatingDTO();
-        ratingDTO.setRate(ratingDTO.getRate());
-        ratingDTO.setCount(ratingDTO.getCount());
+        ratingDTO.setRate(rating.getRate());
+        ratingDTO.setCount(rating.getCount());
         return ratingDTO;
     }
 }

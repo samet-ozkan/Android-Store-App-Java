@@ -8,6 +8,7 @@ import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiService {
 
@@ -22,4 +23,9 @@ public interface ApiService {
 
     @GET("products/category/{category}")
     Observable<List<ProductDTO>> getProductsByCategory(@Path("category") String category);
+
+    @GET("products/category/{category}")
+    Observable<List<ProductDTO>> getLimitedProductsByCategory(
+            @Path("category") String category,
+            @Query("limit") int count);
 }

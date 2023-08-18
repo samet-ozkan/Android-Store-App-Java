@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="java.util.List"/>
+        <import type="com.sametozkan.storeapp.domain.model.Product"/>
+
+        <variable
+            name="categoryName"
+            type="java.lang.String" />
+
+        <variable
+            name="list"
+            type="List&lt;Product>" />
+
+        <variable
+            name="adapter"
+            type="com.sametozkan.storeapp.presentation.home.adapter.ProductAdapter" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/categoryTitle"
+                style="@style/Title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.9"
+                android:text="@{categoryName}"
+                tools:text="Category Name" />
+
+            <ImageView
+                android:id="@+id/arrowForward"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_weight="0.1"
+                android:src="@drawable/baseline_arrow_forward_24" />
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/categoryRv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:setAdapter="@{adapter}"
+            app:submitList="@{list}"
+            tools:listitem="@layout/product_item" />
+
+    </LinearLayout>
+</layout>

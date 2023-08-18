@@ -11,7 +11,7 @@ import javax.inject.Inject;
 
 import io.reactivex.rxjava3.core.Observable;
 
-public class GetAllProductsUseCase extends UseCase<Observable<List<Product>>, Void> {
+public class GetAllProductsUseCase {
 
     private static final String TAG = "GetAllProductsUseCase";
 
@@ -27,13 +27,7 @@ public class GetAllProductsUseCase extends UseCase<Observable<List<Product>>, Vo
 
     }
 
-    @Override
     public Observable<List<Product>> execute() {
         return productRepository.getAllProducts();
-    }
-
-    @Override
-    public Observable<List<Product>> execute(Void unused) {
-        throw new UnsupportedOperationException();
     }
 }

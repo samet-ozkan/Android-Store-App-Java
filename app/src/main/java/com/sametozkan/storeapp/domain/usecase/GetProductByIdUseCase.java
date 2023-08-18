@@ -7,7 +7,7 @@ import javax.inject.Inject;
 
 import io.reactivex.rxjava3.core.Single;
 
-public class GetProductByIdUseCase extends UseCase<Single<Product>, Integer> {
+public class GetProductByIdUseCase{
 
     private ProductRepository productRepository;
 
@@ -16,13 +16,8 @@ public class GetProductByIdUseCase extends UseCase<Single<Product>, Integer> {
         this.productRepository = productRepository;
     }
 
-    @Override
-    public Single<Product> execute(Integer productId) {
-        return productRepository.getProductById(productId);
+    public Single<Product> execute(int productId) {
+            return productRepository.getProductById(productId);
     }
 
-    @Override
-    public Single<Product> execute() {
-        throw new UnsupportedOperationException();
-    }
 }

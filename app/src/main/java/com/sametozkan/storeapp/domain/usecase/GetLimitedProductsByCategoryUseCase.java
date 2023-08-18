@@ -9,16 +9,16 @@ import javax.inject.Inject;
 
 import io.reactivex.rxjava3.core.Observable;
 
-public class GetProductsByCategoryUseCase {
+public class GetLimitedProductsByCategoryUseCase{
 
     private ProductRepository productRepository;
 
     @Inject
-    public GetProductsByCategoryUseCase(ProductRepository productRepository) {
+    public GetLimitedProductsByCategoryUseCase(ProductRepository productRepository){
         this.productRepository = productRepository;
     }
 
-    public Observable<List<Product>> execute(String category) {
-        return productRepository.getProductsByCategory(category);
+    public Observable<List<Product>> execute(String category, int count){
+        return productRepository.getLimitedProductsByCategory(category, count);
     }
 }

@@ -8,7 +8,7 @@ import javax.inject.Inject;
 
 import io.reactivex.rxjava3.core.Single;
 
-public class GetCategoryListUseCase extends UseCase<Single<List<String>>, Void> {
+public class GetCategoryListUseCase {
 
     private CategoryRepository categoryRepository;
 
@@ -17,12 +17,6 @@ public class GetCategoryListUseCase extends UseCase<Single<List<String>>, Void> 
         this.categoryRepository = categoryRepository;
     }
 
-    @Override
-    public Single<List<String>> execute(Void unused) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
     public Single<List<String>> execute() {
         return categoryRepository.getCategoryList();
     }

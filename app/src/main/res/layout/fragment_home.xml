@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.sametozkan.storeapp.presentation.home.HomeViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/mensClothing"
+                layout="@layout/category_item"
+                categoryName="@{`Men's Clothing`}"
+                list="@{viewModel.mensClothingList}"/>
+
+            <include
+                android:id="@+id/womensClothing"
+                layout="@layout/category_item"
+                categoryName="@{`Women's Clothing`}"
+                list="@{viewModel.womensClothingList}"
+                />
+
+            <include
+                android:id="@+id/jewelery"
+                layout="@layout/category_item"
+                categoryName="@{`Jewelery`}"
+                list="@{viewModel.jeweleryList}"
+                />
+
+            <include
+                android:id="@+id/electronics"
+                layout="@layout/category_item"
+                categoryName="@{`Electronics`}"
+                list="@{viewModel.electronicsList}"
+                />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</layout>

@@ -3,7 +3,6 @@ package com.sametozkan.storeapp.data.dto;
 import com.google.gson.annotations.SerializedName;
 
 public class RatingDTO {
-
     @SerializedName("rate")
     private double rate;
 
