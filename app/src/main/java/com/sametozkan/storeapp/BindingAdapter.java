@@ -18,6 +18,7 @@ public class BindingAdapter {
     @androidx.databinding.BindingAdapter("submitList")
     public static void submitList(RecyclerView recyclerView, List<Product> list) {
         if (recyclerView.getAdapter() != null) {
+            Log.d(TAG, "submitList: " + list);
             ((ProductAdapter) recyclerView.getAdapter()).setProductList(list);
         }
     }

@@ -4,9 +4,14 @@
     xmlns:bind="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.sametozkan.storeapp.presentation.home.HomeViewModel" />
+
+        <variable
+            name="categoryClickListener"
+            type="com.sametozkan.storeapp.presentation.category.CategoryClickListener" />
     </data>
 
     <ScrollView
@@ -20,30 +25,30 @@
 
             <include
                 android:id="@+id/mensClothing"
+                categoryClickListener="@{categoryClickListener}"
                 layout="@layout/item_category"
-                categoryName="@{`Men's Clothing`}"
-                list="@{viewModel.mensClothingList}"/>
+                list="@{viewModel.mensClothingList}" />
 
             <include
                 android:id="@+id/womensClothing"
+                categoryClickListener="@{categoryClickListener}"
                 layout="@layout/item_category"
-                categoryName="@{`Women's Clothing`}"
-                list="@{viewModel.womensClothingList}"
-                />
+                list="@{viewModel.womensClothingList}" />
+
 
             <include
                 android:id="@+id/jewelery"
+                categoryClickListener="@{categoryClickListener}"
                 layout="@layout/item_category"
-                categoryName="@{`Jewelery`}"
-                list="@{viewModel.jeweleryList}"
-                />
+                list="@{viewModel.jeweleryList}" />
+
 
             <include
                 android:id="@+id/electronics"
+                categoryClickListener="@{categoryClickListener}"
                 layout="@layout/item_category"
-                categoryName="@{`Electronics`}"
-                list="@{viewModel.electronicsList}"
-                />
+                list="@{viewModel.electronicsList}" />
+
 
         </LinearLayout>
 

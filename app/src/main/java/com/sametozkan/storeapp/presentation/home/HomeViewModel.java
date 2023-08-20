@@ -42,36 +42,45 @@ public class HomeViewModel extends ViewModel {
     }
 
     private void fetchLimitedProductsByCategoryUseCase() {
+        final int count = 5;
         disposable.addAll(
                 //Men's Clothing
-                getLimitedProductsByCategoryUseCase.execute(Categories.MENS_CLOTHING, 3)
+                getLimitedProductsByCategoryUseCase.execute(Categories.MENS_CLOTHING.category, count)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(products -> {
                             mensClothingList.postValue(products);
                             Log.d(TAG, "fetchLimitedProductsByCategoryUseCase: " + products.get(1).getRating().getRate()
                             );
+                        }, throwable -> {
+                            Log.e(TAG, "fetchLimitedProductsByCategoryUseCase: ", throwable);
                         }),
                 //Women's Clothing
-                getLimitedProductsByCategoryUseCase.execute(Categories.WOMENS_CLOTHING, 3)
+                getLimitedProductsByCategoryUseCase.execute(Categories.WOMENS_CLOTHING.category, count)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(products -> {
                             womensClothingList.postValue(products);
+                        }, throwable -> {
+                            Log.e(TAG, "fetchLimitedProductsByCategoryUseCase: ", throwable);
                         }),
                 //Jewelery
-                getLimitedProductsByCategoryUseCase.execute(Categories.JEWELERY, 3)
+                getLimitedProductsByCategoryUseCase.execute(Categories.JEWELERY.category, count)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(products -> {
                             jeweleryList.postValue(products);
+                        }, throwable -> {
+                            Log.e(TAG, "fetchLimitedProductsByCategoryUseCase: ", throwable);
                         }),
                 //Electronics
-                getLimitedProductsByCategoryUseCase.execute(Categories.ELECTRONICS, 3)
+                getLimitedProductsByCategoryUseCase.execute(Categories.ELECTRONICS.category, count)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(products -> {
                             electronicsList.postValue(products);
+                        }, throwable -> {
+                            Log.e(TAG, "fetchLimitedProductsByCategoryUseCase: ", throwable);
                         })
         );
 
@@ -95,5 +104,11 @@ public class HomeViewModel extends ViewModel {
 
     public CompositeDisposable getDisposable() {
         return disposable;
+    }
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        disposable.clear();
     }
 }

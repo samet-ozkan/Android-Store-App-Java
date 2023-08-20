@@ -1,22 +1,37 @@
 package com.sametozkan.storeapp.presentation.home.adapter;
 
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.sametozkan.storeapp.databinding.ItemProductBinding;
 import com.sametozkan.storeapp.R;
 import com.sametozkan.storeapp.domain.model.Product;
+import com.sametozkan.storeapp.presentation.product.ProductDetailActivity;
+import com.sametozkan.storeapp.util.Constants;
 
 import java.util.List;
 
+
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
 
+    private static final String TAG = "ProductAdapter";
+
     private List<Product> productList;
+    private Context context;
+
+    public ProductAdapter(Context context) {
+        this.context = context;
+    }
 
     public void setProductList(List<Product> productList) {
+        Log.d(TAG, "setProductList: " + productList);
         this.productList = productList;
         notifyDataSetChanged();
     }
@@ -41,7 +56,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         return (productList == null) ? 0 : productList.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder implements ProductClickListener {
 
         private ItemProductBinding binding;
 
@@ -52,6 +67,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
         public void bindItem(Product product) {
             binding.setProduct(product);
+            binding.setClickListener(this);
+        }
+
+        @Override
+        public void onProductClicked(Product product) {
+            final Intent intent = new Intent(context, ProductDetailActivity.class);
+            intent.putExtra(Constants.PRODUCT_ID, product.getId());
+            context.startActivity(intent);
         }
     }
 }

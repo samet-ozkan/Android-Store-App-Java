@@ -13,6 +13,10 @@
             type="java.lang.String" />
 
         <variable
+            name="categoryClickListener"
+            type="com.sametozkan.storeapp.presentation.category.CategoryClickListener" />
+
+        <variable
             name="list"
             type="List&lt;Product>" />
 
@@ -22,12 +26,15 @@
     </data>
 
     <LinearLayout
+        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/header"
+            android:onClick="@{() -> categoryClickListener.onCategoryClicked(categoryName)}"
+            android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">

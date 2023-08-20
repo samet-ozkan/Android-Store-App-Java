@@ -1,9 +1,20 @@
 package com.sametozkan.storeapp.util;
 
-public final class Categories {
+public enum Categories {
 
-    public static final String MENS_CLOTHING = "men's clothing";
-    public static final String WOMENS_CLOTHING = "women's clothing";
-    public static final String JEWELERY = "jewelery";
-    public static final String ELECTRONICS = "electronics";
+    MENS_CLOTHING("men's clothing", "Men's Clothing"),
+
+    WOMENS_CLOTHING("women's clothing", "Women's Clothing"),
+
+    JEWELERY("jewelery", "Jewelery"),
+
+    ELECTRONICS("electronics", "Electronics");
+
+    public final String category;
+    public final String categoryTitle;
+
+    Categories(String category, String categoryTitle) {
+        this.category = category;
+        this.categoryTitle = categoryTitle;
+    }
 }

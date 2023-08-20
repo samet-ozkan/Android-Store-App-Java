@@ -1,7 +1,9 @@
 package com.sametozkan.storeapp.presentation.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,21 +12,23 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.sametozkan.storeapp.MyApplication;
 import com.sametozkan.storeapp.R;
 import com.sametozkan.storeapp.databinding.FragmentHomeBinding;
-import com.sametozkan.storeapp.domain.model.Product;
 import com.sametozkan.storeapp.presentation.ViewModelFactory;
+import com.sametozkan.storeapp.presentation.category.CategoryActivity;
+import com.sametozkan.storeapp.presentation.category.CategoryClickListener;
 import com.sametozkan.storeapp.presentation.home.adapter.ProductAdapter;
-
-import java.util.List;
+import com.sametozkan.storeapp.util.Categories;
+import com.sametozkan.storeapp.util.Constants;
 
 import javax.inject.Inject;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements CategoryClickListener {
+
+    private static final String TAG = "HomeFragment";
 
     private FragmentHomeBinding binding;
 
@@ -46,6 +50,7 @@ public class HomeFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
         binding.setLifecycleOwner(getViewLifecycleOwner());
         binding.setViewModel(homeViewModel);
+        binding.setCategoryClickListener(this);
         return binding.getRoot();
     }
 
@@ -59,19 +64,42 @@ public class HomeFragment extends Fragment {
     }
 
     private void setMensClothing() {
-        binding.mensClothing.setAdapter(new ProductAdapter());
+        binding.mensClothing.setCategoryName(Categories.MENS_CLOTHING.categoryTitle);
+        binding.mensClothing.setAdapter(new ProductAdapter(getContext()));
     }
 
     private void setWomensClothing() {
-        binding.womensClothing.setAdapter(new ProductAdapter());
+        binding.womensClothing.setCategoryName(Categories.WOMENS_CLOTHING.categoryTitle);
+        binding.womensClothing.setAdapter(new ProductAdapter(getContext()));
     }
 
     private void setJewelery() {
-        binding.jewelery.setAdapter(new ProductAdapter());
+        binding.jewelery.setCategoryName(Categories.JEWELERY.categoryTitle);
+        binding.jewelery.setAdapter(new ProductAdapter(getContext()));
     }
 
     private void setElectronics() {
-        binding.electronics.setAdapter(new ProductAdapter());
+        binding.electronics.setCategoryName(Categories.ELECTRONICS.categoryTitle);
+        binding.electronics.setAdapter(new ProductAdapter(getContext()));
     }
 
+    @Override
+    public void onCategoryClicked(String categoryName) {
+        final Intent intent = new Intent(getContext(), CategoryActivity.class);
+        if (categoryName.equals(Categories.MENS_CLOTHING.categoryTitle)) {
+            intent.putExtra(Constants.CATEGORY, Categories.MENS_CLOTHING.category);
+            startActivity(intent);
+        } else if (categoryName.equals(Categories.WOMENS_CLOTHING.categoryTitle)) {
+            intent.putExtra(Constants.CATEGORY, Categories.WOMENS_CLOTHING.category);
+            startActivity(intent);
+        } else if (categoryName.equals(Categories.JEWELERY.categoryTitle)) {
+            intent.putExtra(Constants.CATEGORY, Categories.JEWELERY.category);
+            startActivity(intent);
+        } else if (categoryName.equals(Categories.ELECTRONICS.categoryTitle)) {
+            intent.putExtra(Constants.CATEGORY, Categories.ELECTRONICS.category);
+            startActivity(intent);
+        } else {
+            Log.e(TAG, "onCategoryClicked: Invalid category!", new IllegalArgumentException());
+        }
+    }
 }

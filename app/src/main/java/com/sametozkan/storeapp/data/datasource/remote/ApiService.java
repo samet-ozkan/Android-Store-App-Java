@@ -27,5 +27,5 @@ public interface ApiService {
     @GET("products/category/{category}")
     Observable<List<ProductDTO>> getLimitedProductsByCategory(
             @Path("category") String category,
-            @Query("limit") int count);
+            @Query("limit") int limit);
 }
