@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "230589871452",
+    "project_id": "store-app-e3b6a",
+    "storage_bucket": "store-app-e3b6a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:230589871452:android:2255fbd4e5f058b8a5fd99",
+        "android_client_info": {
+          "package_name": "com.sametozkan.storeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "230589871452-0h1q51ok5tr86r6l946lnpjd1rsuie3i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrhUQkr1Si2blwXAaOR8zuaUrQZNgrPwM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "230589871452-0h1q51ok5tr86r6l946lnpjd1rsuie3i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

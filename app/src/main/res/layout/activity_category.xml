@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <import type="com.sametozkan.storeapp.domain.model.Product"/>
         <import type="java.util.List"/>
 

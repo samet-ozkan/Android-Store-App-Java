@@ -5,7 +5,10 @@ import androidx.lifecycle.ViewModel;
 import com.sametozkan.storeapp.domain.usecase.GetLimitedProductsByCategoryUseCase;
 import com.sametozkan.storeapp.domain.usecase.GetProductByIdUseCase;
 import com.sametozkan.storeapp.domain.usecase.GetProductsByCategoryUseCase;
+import com.sametozkan.storeapp.domain.usecase.LoginUserUseCase;
+import com.sametozkan.storeapp.domain.usecase.RegisterUserUseCase;
 import com.sametozkan.storeapp.presentation.ViewModelFactory;
+import com.sametozkan.storeapp.presentation.authentication.AuthViewModel;
 import com.sametozkan.storeapp.presentation.category.CategoryViewModel;
 import com.sametozkan.storeapp.presentation.home.HomeViewModel;
 import com.sametozkan.storeapp.presentation.product.ProductDetailViewModel;
@@ -35,28 +38,35 @@ public class ViewModelModule {
 
     @Provides
     ViewModelFactory provideViewModelFactory(Map<Class<? extends ViewModel>,
-            Provider<ViewModel>> providerMap){
+            Provider<ViewModel>> providerMap) {
         return new ViewModelFactory(providerMap);
     }
 
     @Provides
     @IntoMap
     @ViewModelKey(HomeViewModel.class)
-    ViewModel provideHomeViewModel(GetLimitedProductsByCategoryUseCase getLimitedProductsByCategoryUseCase){
+    ViewModel provideHomeViewModel(GetLimitedProductsByCategoryUseCase getLimitedProductsByCategoryUseCase) {
         return new HomeViewModel(getLimitedProductsByCategoryUseCase);
     }
 
     @Provides
     @IntoMap
     @ViewModelKey(ProductDetailViewModel.class)
-    ViewModel provideProductDetailViewModel(GetProductByIdUseCase getProductByIdUseCase){
+    ViewModel provideProductDetailViewModel(GetProductByIdUseCase getProductByIdUseCase) {
         return new ProductDetailViewModel(getProductByIdUseCase);
     }
 
     @Provides
     @IntoMap
     @ViewModelKey(CategoryViewModel.class)
-    ViewModel provideCategoryViewModel(GetProductsByCategoryUseCase getProductsByCategoryUseCase){
+    ViewModel provideCategoryViewModel(GetProductsByCategoryUseCase getProductsByCategoryUseCase) {
         return new CategoryViewModel(getProductsByCategoryUseCase);
+    }
+
+    @Provides
+    @IntoMap
+    @ViewModelKey(AuthViewModel.class)
+    ViewModel provideAuthViewModel(LoginUserUseCase loginUserUseCase, RegisterUserUseCase registerUserUseCase) {
+        return new AuthViewModel(loginUserUseCase, registerUserUseCase);
     }
 }

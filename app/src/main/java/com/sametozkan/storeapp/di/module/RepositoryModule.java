@@ -2,10 +2,13 @@ package com.sametozkan.storeapp.di.module;
 
 import android.app.Application;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.sametozkan.storeapp.data.datasource.remote.ApiService;
 import com.sametozkan.storeapp.data.repository.CategoryRepositoryImpl;
+import com.sametozkan.storeapp.data.repository.FirebaseRepositoryImpl;
 import com.sametozkan.storeapp.data.repository.ProductRepositoryImpl;
 import com.sametozkan.storeapp.domain.repository.CategoryRepository;
+import com.sametozkan.storeapp.domain.repository.FirebaseRepository;
 import com.sametozkan.storeapp.domain.repository.ProductRepository;
 
 import javax.inject.Singleton;
@@ -26,5 +29,11 @@ public class RepositoryModule {
     @Singleton
     public CategoryRepository provideCategoryRepository(ApiService apiService) {
         return new CategoryRepositoryImpl(apiService);
+    }
+
+    @Provides
+    @Singleton
+    public FirebaseRepository provideFirebaseRepository(FirebaseAuth firebaseAuth){
+        return new FirebaseRepositoryImpl(firebaseAuth);
     }
 }
