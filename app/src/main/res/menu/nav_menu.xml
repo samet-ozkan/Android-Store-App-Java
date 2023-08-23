@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group
+        android:id="@+id/pages"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/pagesTitle"
+            android:title="Pages">
+
+            <menu>
+
+                <item
+                    android:id="@+id/home"
+                    android:icon="@drawable/baseline_home_24"
+                    android:title="Home" />
+
+                <item
+                    android:id="@+id/categories"
+                    android:icon="@drawable/baseline_list_24"
+                    android:title="Categories" />
+
+                <item
+                    android:id="@+id/shoppingCart"
+                    android:icon="@drawable/baseline_shopping_cart_24"
+                    android:title="Shopping Cart" />
+
+                <item
+                    android:id="@+id/pastOrders"
+                    android:icon="@drawable/baseline_history_24"
+                    android:title="Past Orders" />
+
+                <item
+                    android:id="@+id/favorites"
+                    android:icon="@drawable/baseline_favorite_24"
+                    android:title="Favorites" />
+            </menu>
+        </item>
+
+
+    </group>
+
+    <group
+        android:id="@+id/account"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/accountTitle"
+            android:title="Account">
+
+            <menu>
+                <item
+                    android:id="@+id/logout"
+                    android:icon="@drawable/baseline_logout_24"
+                    android:title="Logout" />
+            </menu>
+        </item>
+
+    </group>
+
+
+</menu>

@@ -2,19 +2,19 @@
 <resources>
 
     <style name="Title">
-        <item name="android:textSize">21sp</item>
+        <item name="android:textSize">19sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="Text">
-        <item name="android:textSize">17sp</item>
+        <item name="android:textSize">15sp</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="Subtext">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">13sp</item>
         <item name="android:textStyle">italic</item>
         <item name="android:textColor">@color/black</item>
     </style>

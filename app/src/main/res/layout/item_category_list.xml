@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="categoryName"
+            type="java.lang.String" />
+
+        <variable
+            name="categoryClickListener"
+            type="com.sametozkan.storeapp.presentation.category.CategoryClickListener" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/purple_200"
+        app:cardCornerRadius="25dp">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> categoryClickListener.onCategoryClicked(categoryName)}"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/categoryName"
+                style="@style/Title"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:text="@{categoryName}"
+                tools:text="Category Name" />
+
+            <ImageView
+                android:id="@+id/arrowForward"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/baseline_arrow_forward_24" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

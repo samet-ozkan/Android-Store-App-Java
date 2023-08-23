@@ -44,9 +44,10 @@ public class RegisterFragment extends Fragment {
         setRegisterButtonClickListener();
     }
 
-    private void setRegisterButtonClickListener(){
+    private void setRegisterButtonClickListener() {
         binding.registerButton.setOnClickListener(view -> {
             authClickListener.onRegisterButtonClicked(
+                    binding.fullName.getText().toString(),
                     binding.email.getText().toString(),
                     binding.password.getText().toString());
         });

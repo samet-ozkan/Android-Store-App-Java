@@ -6,12 +6,13 @@
     <data>
 
         <variable
-            name="categoryViewModel"
-            type="com.sametozkan.storeapp.presentation.category.CategoryViewModel" />
+            name="viewModel"
+            type="com.sametozkan.storeapp.presentation.categoryList.CategoryListViewModel" />
 
         <variable
             name="adapter"
-            type="com.sametozkan.storeapp.presentation.home.adapter.ProductAdapter" />
+            type="com.sametozkan.storeapp.presentation.categoryList.CategoryListAdapter" />
+
     </data>
 
     <LinearLayout
@@ -20,15 +21,14 @@
         android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/productRv"
+            android:id="@+id/categoriesRv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="2"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:setAdapter="@{adapter}"
-            app:submitList="@{categoryViewModel.productList}"
-            tools:listitem="@layout/item_product" />
-    </LinearLayout>
+            app:submitCategoryList="@{viewModel.categoryList}" />
 
+
+    </LinearLayout>
 </layout>

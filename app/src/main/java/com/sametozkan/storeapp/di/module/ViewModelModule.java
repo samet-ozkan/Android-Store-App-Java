@@ -2,14 +2,19 @@ package com.sametozkan.storeapp.di.module;
 
 import androidx.lifecycle.ViewModel;
 
+import com.sametozkan.storeapp.domain.usecase.GetCategoryListUseCase;
+import com.sametozkan.storeapp.domain.usecase.GetCurrentUserUseCase;
 import com.sametozkan.storeapp.domain.usecase.GetLimitedProductsByCategoryUseCase;
 import com.sametozkan.storeapp.domain.usecase.GetProductByIdUseCase;
 import com.sametozkan.storeapp.domain.usecase.GetProductsByCategoryUseCase;
 import com.sametozkan.storeapp.domain.usecase.LoginUserUseCase;
 import com.sametozkan.storeapp.domain.usecase.RegisterUserUseCase;
+import com.sametozkan.storeapp.domain.usecase.SaveNewUserUseCase;
+import com.sametozkan.storeapp.presentation.MainActivityViewModel;
 import com.sametozkan.storeapp.presentation.ViewModelFactory;
 import com.sametozkan.storeapp.presentation.authentication.AuthViewModel;
 import com.sametozkan.storeapp.presentation.category.CategoryViewModel;
+import com.sametozkan.storeapp.presentation.categoryList.CategoryListViewModel;
 import com.sametozkan.storeapp.presentation.home.HomeViewModel;
 import com.sametozkan.storeapp.presentation.product.ProductDetailViewModel;
 
@@ -52,8 +57,9 @@ public class ViewModelModule {
     @Provides
     @IntoMap
     @ViewModelKey(ProductDetailViewModel.class)
-    ViewModel provideProductDetailViewModel(GetProductByIdUseCase getProductByIdUseCase) {
-        return new ProductDetailViewModel(getProductByIdUseCase);
+    ViewModel provideProductDetailViewModel(GetProductByIdUseCase getProductByIdUseCase,
+                                            GetCurrentUserUseCase getCurrentUserUseCase) {
+        return new ProductDetailViewModel(getProductByIdUseCase, getCurrentUserUseCase);
     }
 
     @Provides
@@ -66,7 +72,22 @@ public class ViewModelModule {
     @Provides
     @IntoMap
     @ViewModelKey(AuthViewModel.class)
-    ViewModel provideAuthViewModel(LoginUserUseCase loginUserUseCase, RegisterUserUseCase registerUserUseCase) {
-        return new AuthViewModel(loginUserUseCase, registerUserUseCase);
+    ViewModel provideAuthViewModel(LoginUserUseCase loginUserUseCase, RegisterUserUseCase registerUserUseCase,
+                                   SaveNewUserUseCase saveNewUserUseCase) {
+        return new AuthViewModel(loginUserUseCase, registerUserUseCase, saveNewUserUseCase);
+    }
+
+    @Provides
+    @IntoMap
+    @ViewModelKey(CategoryListViewModel.class)
+    ViewModel provideCategoryListViewModel(GetCategoryListUseCase getCategoryListUseCase){
+        return new CategoryListViewModel(getCategoryListUseCase);
+    }
+
+    @Provides
+    @IntoMap
+    @ViewModelKey(MainActivityViewModel.class)
+    ViewModel provideMainActivityViewModel(GetCurrentUserUseCase getCurrentUserUseCase){
+        return new MainActivityViewModel(getCurrentUserUseCase);
     }
 }

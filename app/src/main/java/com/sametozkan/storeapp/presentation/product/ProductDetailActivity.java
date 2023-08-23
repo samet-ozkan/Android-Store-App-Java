@@ -11,13 +11,14 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.sametozkan.storeapp.MyApplication;
 import com.sametozkan.storeapp.R;
+import com.sametozkan.storeapp.data.datasource.local.sharedpreferences.ShoppingCart;
 import com.sametozkan.storeapp.databinding.ActivityProductDetailBinding;
 import com.sametozkan.storeapp.presentation.ViewModelFactory;
 import com.sametozkan.storeapp.util.Constants;
 
 import javax.inject.Inject;
 
-public class ProductDetailActivity extends AppCompatActivity {
+public class ProductDetailActivity extends AppCompatActivity implements ProductDetailClickListener {
 
     private static final String TAG = "ProductDetailActivity";
 
@@ -61,9 +62,21 @@ public class ProductDetailActivity extends AppCompatActivity {
         });
     }
 
-    private void observeProduct(){
+    private void observeProduct() {
         productDetailViewModel.getProduct().observe(this, product -> {
             activityProductDetailBinding.setProduct(product);
         });
+    }
+
+    @Override
+    public void onAddToCartButtonClicked(int productId) {
+        ShoppingCart shoppingCart = new ShoppingCart(this,
+                productDetailViewModel.getCurrentUser().getEmail());
+        shoppingCart.addProductIdToCart(productId);
+    }
+
+    @Override
+    public void onFavoriteButtonClicked() {
+        //
     }
 }

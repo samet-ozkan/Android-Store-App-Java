@@ -7,12 +7,12 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.sametozkan.storeapp.MainActivity;
+import com.sametozkan.storeapp.presentation.MainActivity;
 import com.sametozkan.storeapp.MyApplication;
 import com.sametozkan.storeapp.R;
+import com.sametozkan.storeapp.domain.model.User;
 import com.sametozkan.storeapp.presentation.ViewModelFactory;
 import com.sametozkan.storeapp.presentation.authentication.login.LoginFragment;
 import com.sametozkan.storeapp.presentation.authentication.register.RegisterFragment;
@@ -37,16 +37,21 @@ public class AuthActivity extends AppCompatActivity implements AuthClickListener
         openLoginFragment();
     }
 
-    private void openLoginFragment(){
+    private void openLoginFragment() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frameLayout, new LoginFragment())
                 .commit();
     }
 
-    private void openRegisterFragment(){
+    private void openRegisterFragment() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frameLayout, new RegisterFragment())
                 .commit();
+    }
+
+    private void startMainActivity() {
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
 
     @Override
@@ -54,19 +59,35 @@ public class AuthActivity extends AppCompatActivity implements AuthClickListener
         authViewModel.loginUser(email, password, task -> {
             if (task.isSuccessful()) {
                 Toast.makeText(this, "Signed in successfully!", Toast.LENGTH_LONG);
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-                finish();
+                startMainActivity();
             }
         });
     }
 
     @Override
-    public void onRegisterButtonClicked(String email, String password) {
+    public void onRegisterButtonClicked(String fullName, String email, String password) {
         authViewModel.registerUser(email, password, task -> {
             if (task.isSuccessful()) {
                 Toast.makeText(this, "Signed up successfully!", Toast.LENGTH_LONG).show();
-                openLoginFragment();
+                authViewModel.loginUser(email, password, task1 -> {
+                    if (task1.isSuccessful()) {
+                        Log.i(TAG, "onRegisterButtonClicked: Signed in successfully!");
+                        authViewModel.saveNewUser(
+                                new User(
+                                        task.getResult().getUser().getUid(),
+                                        fullName,
+                                        email), task2 -> {
+                                    if (task1.isSuccessful()) {
+                                        Log.i(TAG, "onRegisterButtonClicked: task is successfull!");
+                                        startMainActivity();
+                                    } else {
+                                        Log.e(TAG, "onRegisterButtonClicked: task is not successfull", task.getException());
+                                    }
+                                });
+                    } else {
+                        Log.e(TAG, "onRegisterButtonClicked: ", task1.getException());
+                    }
+                });
             }
         });
     }

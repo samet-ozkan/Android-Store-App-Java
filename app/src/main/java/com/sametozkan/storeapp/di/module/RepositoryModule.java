@@ -3,6 +3,7 @@ package com.sametozkan.storeapp.di.module;
 import android.app.Application;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.sametozkan.storeapp.data.datasource.remote.ApiService;
 import com.sametozkan.storeapp.data.repository.CategoryRepositoryImpl;
 import com.sametozkan.storeapp.data.repository.FirebaseRepositoryImpl;
@@ -33,7 +34,8 @@ public class RepositoryModule {
 
     @Provides
     @Singleton
-    public FirebaseRepository provideFirebaseRepository(FirebaseAuth firebaseAuth){
-        return new FirebaseRepositoryImpl(firebaseAuth);
+    public FirebaseRepository provideFirebaseRepository(FirebaseAuth firebaseAuth,
+                                                        FirebaseFirestore firebaseFirestore){
+        return new FirebaseRepositoryImpl(firebaseAuth, firebaseFirestore);
     }
 }

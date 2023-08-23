@@ -6,7 +6,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.google.firebase.auth.FirebaseUser;
 import com.sametozkan.storeapp.domain.model.Product;
+import com.sametozkan.storeapp.domain.usecase.GetCurrentUserUseCase;
 import com.sametozkan.storeapp.domain.usecase.GetProductByIdUseCase;
 
 import javax.inject.Inject;
@@ -23,11 +25,17 @@ public class ProductDetailViewModel extends ViewModel {
     private final MutableLiveData<Product> product = new MutableLiveData<Product>();
     private CompositeDisposable disposable;
     private GetProductByIdUseCase getProductByIdUseCase;
+    private GetCurrentUserUseCase getCurrentUserUseCase;
 
     @Inject
-    public ProductDetailViewModel(GetProductByIdUseCase getProductByIdUseCase) {
+    public ProductDetailViewModel(GetProductByIdUseCase getProductByIdUseCase,
+                                  GetCurrentUserUseCase getCurrentUserUseCase) {
         disposable = new CompositeDisposable();
         this.getProductByIdUseCase = getProductByIdUseCase;
+    }
+
+    public FirebaseUser getCurrentUser() {
+        return getCurrentUserUseCase.execute();
     }
 
     public MutableLiveData<Integer> getProductId() {
@@ -38,9 +46,8 @@ public class ProductDetailViewModel extends ViewModel {
         disposable.add(getProductByIdUseCase.execute(productId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe((product1, throwable) -> {
+                .subscribe((product1) -> {
                     this.product.postValue(product1);
-                    Log.e(TAG, "fetchProductById: ", throwable);
                 }));
     }
 

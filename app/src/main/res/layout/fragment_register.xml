@@ -2,37 +2,47 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+
         <variable
             name="authClickListener"
             type="com.sametozkan.storeapp.presentation.authentication.AuthClickListener" />
     </data>
-<LinearLayout
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.AppCompatEditText
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/email"
-        android:hint="Email"
-        style="@style/Text"
-        android:inputType="textEmailAddress"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/password"
-        android:hint="Password"
-        style="@style/Text"
-        android:inputType="textPassword"/>
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/fullName"
+            style="@style/Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Full Name"
+            android:inputType="text" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/registerButton"
-        android:text="Register"/>
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/email"
+            style="@style/Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:inputType="textEmailAddress" />
 
-</LinearLayout>
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/password"
+            style="@style/Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/registerButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Register" />
+
+    </LinearLayout>
 
 </layout>
