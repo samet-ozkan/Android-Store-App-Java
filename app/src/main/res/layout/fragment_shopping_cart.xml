@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -7,11 +8,11 @@
 
         <variable
             name="viewModel"
-            type="com.sametozkan.storeapp.presentation.categoryList.CategoryListViewModel" />
+            type="com.sametozkan.storeapp.presentation.shoppingcart.ShoppingCartViewModel" />
 
         <variable
-            name="adapter"
-            type="com.sametozkan.storeapp.presentation.categoryList.CategoryListAdapter" />
+            name="shoppingCartAdapter"
+            type="com.sametozkan.storeapp.presentation.shoppingcart.ShoppingCartAdapter" />
 
     </data>
 
@@ -21,14 +22,14 @@
         android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/categoriesRv"
+            android:id="@+id/cartRv"
+            setAdapter="@{shoppingCartAdapter}"
+            submitList="@{viewModel.productList}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:setAdapter="@{adapter}"
-            app:submitList="@{viewModel.categoryList}" />
-
+            tools:listitem="@layout/item_cart_product" />
 
     </LinearLayout>
 </layout>

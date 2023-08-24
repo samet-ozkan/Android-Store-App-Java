@@ -1,8 +1,7 @@
 package com.sametozkan.storeapp.presentation.product;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,13 +31,17 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_detail);
         ((MyApplication) getApplication()).getAppComponent().inject(this);
         activityProductDetailBinding = DataBindingUtil.setContentView(this, R.layout.activity_product_detail);
         setViewModel();
         checkIntent();
-        observeProductId();
+        observeProductById();
         observeProduct();
+        setClickListener();
+    }
+
+    private void setClickListener() {
+        activityProductDetailBinding.setClickListener(this);
     }
 
     private void setViewModel() {
@@ -54,7 +57,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         }
     }
 
-    private void observeProductId() {
+    private void observeProductById() {
         productDetailViewModel.getProductId().observe(this, (productId) -> {
             if (productId != null) {
                 productDetailViewModel.fetchProductById(productId);
@@ -70,9 +73,12 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
 
     @Override
     public void onAddToCartButtonClicked(int productId) {
-        ShoppingCart shoppingCart = new ShoppingCart(this,
-                productDetailViewModel.getCurrentUser().getEmail());
-        shoppingCart.addProductIdToCart(productId);
+        if (activityProductDetailBinding.getProduct() != null) {
+            ShoppingCart shoppingCart = new ShoppingCart(this,
+                    productDetailViewModel.getCurrentUser().getEmail());
+            shoppingCart.addProductIdToCart(productId);
+            Toast.makeText(this, "Product added to cart successfully!", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override

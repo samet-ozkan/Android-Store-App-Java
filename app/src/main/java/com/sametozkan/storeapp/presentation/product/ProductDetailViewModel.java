@@ -32,6 +32,7 @@ public class ProductDetailViewModel extends ViewModel {
                                   GetCurrentUserUseCase getCurrentUserUseCase) {
         disposable = new CompositeDisposable();
         this.getProductByIdUseCase = getProductByIdUseCase;
+        this.getCurrentUserUseCase = getCurrentUserUseCase;
     }
 
     public FirebaseUser getCurrentUser() {

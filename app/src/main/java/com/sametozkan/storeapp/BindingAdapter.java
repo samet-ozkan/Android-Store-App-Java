@@ -14,26 +14,36 @@ import com.sametozkan.storeapp.domain.model.Product;
 import com.sametozkan.storeapp.domain.model.User;
 import com.sametozkan.storeapp.presentation.categoryList.CategoryListAdapter;
 import com.sametozkan.storeapp.presentation.home.adapter.ProductAdapter;
+import com.sametozkan.storeapp.presentation.shoppingcart.ShoppingCartAdapter;
 
 import java.util.List;
+import java.util.Locale;
 
 public class BindingAdapter {
 
     private static final String TAG = "BindingAdapter";
 
     @androidx.databinding.BindingAdapter("submitList")
-    public static void submitList(RecyclerView recyclerView, List<Product> list) {
-        if (recyclerView.getAdapter() != null) {
-            ((ProductAdapter) recyclerView.getAdapter()).setProductList(list);
+    public static void submitList(RecyclerView recyclerView, List list) {
+        RecyclerView.Adapter adapter = recyclerView.getAdapter();
+        if (adapter != null) {
+            if(adapter instanceof ProductAdapter){
+                ((ProductAdapter) adapter).setProductList(list);
+            }
+            else if(adapter instanceof CategoryListAdapter){
+                ((CategoryListAdapter) adapter).setCategoryList(list);
+            }
+            else if(adapter instanceof ShoppingCartAdapter){
+                ((ShoppingCartAdapter) adapter).setProductList(list);
+            }
         }
     }
 
-    @androidx.databinding.BindingAdapter("submitCategoryList")
+    /*@androidx.databinding.BindingAdapter("submitCategoryList")
     public static void submitCategoryList(RecyclerView recyclerView, List<String> list) {
         if (recyclerView.getAdapter() != null) {
-            ((CategoryListAdapter) recyclerView.getAdapter()).setCategoryList(list);
         }
-    }
+    }*/
 
     @androidx.databinding.BindingAdapter("setAdapter")
     public static void setAdapter(RecyclerView recyclerView, RecyclerView.Adapter adapter) {

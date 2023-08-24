@@ -5,21 +5,15 @@
 
     <data>
 
-        <import type="java.util.List" />
-
-        <import type="com.sametozkan.storeapp.domain.model.Product" />
+        <import type="com.sametozkan.storeapp.domain.model.Product"/>
 
         <variable
             name="product"
-            type="com.sametozkan.storeapp.domain.model.Product" />
+            type="Product" />
 
         <variable
-            name="list"
-            type="List&lt;Product>" />
-
-        <variable
-            name="adapter"
-            type="com.sametozkan.storeapp.presentation.home.adapter.ProductAdapter" />
+            name="clickListener"
+            type="com.sametozkan.storeapp.presentation.product.ProductDetailClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -159,7 +153,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:text="Add to Cart" />
+                android:text="Add to Cart"
+                android:onClick="@{() -> clickListener.onAddToCartButtonClicked(product.id)}"/>
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

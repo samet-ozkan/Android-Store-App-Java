@@ -11,6 +11,7 @@ import com.sametozkan.storeapp.presentation.category.CategoryActivity;
 import com.sametozkan.storeapp.presentation.categoryList.CategoryListFragment;
 import com.sametozkan.storeapp.presentation.home.HomeFragment;
 import com.sametozkan.storeapp.presentation.product.ProductDetailActivity;
+import com.sametozkan.storeapp.presentation.shoppingcart.ShoppingCartFragment;
 
 import javax.inject.Singleton;
 
@@ -26,11 +27,17 @@ import dagger.Component;
 public interface AppComponent {
 
     void inject(MainActivity mainActivity);
+
     void inject(AuthActivity authActivity);
+
     void inject(ProductDetailActivity productDetailActivity);
+
     void inject(HomeFragment homeFragment);
 
     void inject(CategoryActivity categoryActivity);
+
     void inject(CategoryListFragment categoryListFragment);
+
+    void inject(ShoppingCartFragment shoppingCartFragment);
 
 }

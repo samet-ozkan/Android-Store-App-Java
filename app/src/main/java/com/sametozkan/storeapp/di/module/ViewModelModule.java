@@ -17,6 +17,7 @@ import com.sametozkan.storeapp.presentation.category.CategoryViewModel;
 import com.sametozkan.storeapp.presentation.categoryList.CategoryListViewModel;
 import com.sametozkan.storeapp.presentation.home.HomeViewModel;
 import com.sametozkan.storeapp.presentation.product.ProductDetailViewModel;
+import com.sametozkan.storeapp.presentation.shoppingcart.ShoppingCartViewModel;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -80,14 +81,21 @@ public class ViewModelModule {
     @Provides
     @IntoMap
     @ViewModelKey(CategoryListViewModel.class)
-    ViewModel provideCategoryListViewModel(GetCategoryListUseCase getCategoryListUseCase){
+    ViewModel provideCategoryListViewModel(GetCategoryListUseCase getCategoryListUseCase) {
         return new CategoryListViewModel(getCategoryListUseCase);
     }
 
     @Provides
     @IntoMap
     @ViewModelKey(MainActivityViewModel.class)
-    ViewModel provideMainActivityViewModel(GetCurrentUserUseCase getCurrentUserUseCase){
+    ViewModel provideMainActivityViewModel(GetCurrentUserUseCase getCurrentUserUseCase) {
         return new MainActivityViewModel(getCurrentUserUseCase);
+    }
+
+    @Provides
+    @IntoMap
+    @ViewModelKey(ShoppingCartViewModel.class)
+    ViewModel provideShoppingCartViewModel(GetProductByIdUseCase getProductByIdUseCase, GetCurrentUserUseCase getCurrentUserUseCase) {
+        return new ShoppingCartViewModel(getProductByIdUseCase, getCurrentUserUseCase);
     }
 }

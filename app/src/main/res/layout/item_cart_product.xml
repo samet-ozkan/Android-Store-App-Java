@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="product"
+            type="com.sametozkan.storeapp.domain.model.Product" />
+
+        <variable
+            name="itemClickListener"
+            type="com.sametozkan.storeapp.presentation.shoppingcart.ShoppingCartItemClickListener" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:padding="2dp"
+        android:layout_margin="5dp">
+
+
+        <ImageView
+            android:id="@+id/removeItem"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:onClick="@{() -> itemClickListener.onRemoveItemClicked(product)}"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/baseline_cancel_24" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:id="@+id/linearLayout"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/productImage"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                app:imageUrl="@{product.image}"
+                tools:src="@drawable/ic_launcher_background" />
+
+            <LinearLayout
+                android:id="@+id/titleDescription"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="3"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/productTitle"
+                    style="@style/Title"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="@{product.title}"
+                    tools:text="Title" />
+
+                <TextView
+                    android:id="@+id/productDescription"
+                    style="@style/Text"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:maxLines="1"
+                    android:text="@{product.description}"
+                    tools:text="Description" />
+
+            </LinearLayout>
+
+            <TextView
+                style="@style/Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/productPrice"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="@{`$` + String.valueOf(product.price)}"
+                tools:text="$35.99" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</layout>
