@@ -2,10 +2,14 @@ package com.sametozkan.storeapp.di.module;
 
 import androidx.lifecycle.ViewModel;
 
+import com.sametozkan.storeapp.domain.usecase.ConfirmOrderUseCase;
 import com.sametozkan.storeapp.domain.usecase.GetCategoryListUseCase;
 import com.sametozkan.storeapp.domain.usecase.GetCurrentUserUseCase;
 import com.sametozkan.storeapp.domain.usecase.GetLimitedProductsByCategoryUseCase;
+import com.sametozkan.storeapp.domain.usecase.GetOrderByIdUseCase;
+import com.sametozkan.storeapp.domain.usecase.GetPastOrdersUseCase;
 import com.sametozkan.storeapp.domain.usecase.GetProductByIdUseCase;
+import com.sametozkan.storeapp.domain.usecase.GetProductListByIdsUseCase;
 import com.sametozkan.storeapp.domain.usecase.GetProductsByCategoryUseCase;
 import com.sametozkan.storeapp.domain.usecase.LoginUserUseCase;
 import com.sametozkan.storeapp.domain.usecase.RegisterUserUseCase;
@@ -16,6 +20,8 @@ import com.sametozkan.storeapp.presentation.authentication.AuthViewModel;
 import com.sametozkan.storeapp.presentation.category.CategoryViewModel;
 import com.sametozkan.storeapp.presentation.categoryList.CategoryListViewModel;
 import com.sametozkan.storeapp.presentation.home.HomeViewModel;
+import com.sametozkan.storeapp.presentation.orderdetail.OrderDetailViewModel;
+import com.sametozkan.storeapp.presentation.pastorders.PastOrdersViewModel;
 import com.sametozkan.storeapp.presentation.product.ProductDetailViewModel;
 import com.sametozkan.storeapp.presentation.shoppingcart.ShoppingCartViewModel;
 
@@ -95,7 +101,28 @@ public class ViewModelModule {
     @Provides
     @IntoMap
     @ViewModelKey(ShoppingCartViewModel.class)
-    ViewModel provideShoppingCartViewModel(GetProductByIdUseCase getProductByIdUseCase, GetCurrentUserUseCase getCurrentUserUseCase) {
-        return new ShoppingCartViewModel(getProductByIdUseCase, getCurrentUserUseCase);
+    ViewModel provideShoppingCartViewModel(
+            GetProductByIdUseCase getProductByIdUseCase,
+            GetCurrentUserUseCase getCurrentUserUseCase,
+            ConfirmOrderUseCase confirmOrderUseCase) {
+        return new ShoppingCartViewModel(
+                getProductByIdUseCase,
+                getCurrentUserUseCase,
+                confirmOrderUseCase);
+    }
+
+    @Provides
+    @IntoMap
+    @ViewModelKey(PastOrdersViewModel.class)
+    ViewModel providePastOrdersViewModel(GetPastOrdersUseCase getPastOrdersUseCase) {
+        return new PastOrdersViewModel(getPastOrdersUseCase);
+    }
+
+    @Provides
+    @IntoMap
+    @ViewModelKey(OrderDetailViewModel.class)
+    ViewModel provideOrderDetailViewModel(GetOrderByIdUseCase getOrderByIdUseCase,
+                                          GetProductListByIdsUseCase getProductListByIdsUseCase){
+        return new OrderDetailViewModel(getOrderByIdUseCase, getProductListByIdsUseCase);
     }
 }

@@ -31,11 +31,6 @@
                     android:id="@+id/pastOrders"
                     android:icon="@drawable/baseline_history_24"
                     android:title="Past Orders" />
-
-                <item
-                    android:id="@+id/favorites"
-                    android:icon="@drawable/baseline_favorite_24"
-                    android:title="Favorites" />
             </menu>
         </item>
 

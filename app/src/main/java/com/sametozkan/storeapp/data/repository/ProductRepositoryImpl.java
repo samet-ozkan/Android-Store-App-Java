@@ -6,6 +6,7 @@ import com.sametozkan.storeapp.data.datasource.remote.ApiService;
 import com.sametozkan.storeapp.data.mapper.ProductMapper;
 import com.sametozkan.storeapp.domain.model.Product;
 import com.sametozkan.storeapp.domain.repository.ProductRepository;
+import com.sametozkan.storeapp.util.Callback;
 
 import java.util.List;
 

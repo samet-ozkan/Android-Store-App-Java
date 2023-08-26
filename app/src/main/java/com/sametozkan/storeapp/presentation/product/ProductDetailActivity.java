@@ -13,7 +13,7 @@ import com.sametozkan.storeapp.R;
 import com.sametozkan.storeapp.data.datasource.local.sharedpreferences.ShoppingCart;
 import com.sametozkan.storeapp.databinding.ActivityProductDetailBinding;
 import com.sametozkan.storeapp.presentation.ViewModelFactory;
-import com.sametozkan.storeapp.util.Constants;
+import com.sametozkan.storeapp.util.IntentConstants;
 
 import javax.inject.Inject;
 
@@ -50,7 +50,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
 
     private void checkIntent() {
         if (getIntent().getExtras() != null) {
-            int productId = getIntent().getIntExtra(Constants.PRODUCT_ID, 0);
+            int productId = getIntent().getIntExtra(IntentConstants.PRODUCT_ID, 0);
             if (productId != 0) {
                 productDetailViewModel.getProductId().setValue(productId);
             }

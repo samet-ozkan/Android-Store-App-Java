@@ -22,7 +22,7 @@ import com.sametozkan.storeapp.presentation.category.CategoryActivity;
 import com.sametozkan.storeapp.presentation.category.CategoryClickListener;
 import com.sametozkan.storeapp.presentation.home.adapter.ProductAdapter;
 import com.sametozkan.storeapp.util.Categories;
-import com.sametozkan.storeapp.util.Constants;
+import com.sametozkan.storeapp.util.IntentConstants;
 
 import javax.inject.Inject;
 
@@ -87,16 +87,16 @@ public class HomeFragment extends Fragment implements CategoryClickListener {
     public void onCategoryClicked(String categoryName) {
         final Intent intent = new Intent(getContext(), CategoryActivity.class);
         if (categoryName.equals(Categories.MENS_CLOTHING.categoryTitle)) {
-            intent.putExtra(Constants.CATEGORY, Categories.MENS_CLOTHING.category);
+            intent.putExtra(IntentConstants.CATEGORY, Categories.MENS_CLOTHING.category);
             startActivity(intent);
         } else if (categoryName.equals(Categories.WOMENS_CLOTHING.categoryTitle)) {
-            intent.putExtra(Constants.CATEGORY, Categories.WOMENS_CLOTHING.category);
+            intent.putExtra(IntentConstants.CATEGORY, Categories.WOMENS_CLOTHING.category);
             startActivity(intent);
         } else if (categoryName.equals(Categories.JEWELERY.categoryTitle)) {
-            intent.putExtra(Constants.CATEGORY, Categories.JEWELERY.category);
+            intent.putExtra(IntentConstants.CATEGORY, Categories.JEWELERY.category);
             startActivity(intent);
         } else if (categoryName.equals(Categories.ELECTRONICS.categoryTitle)) {
-            intent.putExtra(Constants.CATEGORY, Categories.ELECTRONICS.category);
+            intent.putExtra(IntentConstants.CATEGORY, Categories.ELECTRONICS.category);
             startActivity(intent);
         } else {
             Log.e(TAG, "onCategoryClicked: Invalid category!", new IllegalArgumentException());

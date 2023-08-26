@@ -14,7 +14,7 @@ import com.sametozkan.storeapp.databinding.ItemProductBinding;
 import com.sametozkan.storeapp.R;
 import com.sametozkan.storeapp.domain.model.Product;
 import com.sametozkan.storeapp.presentation.product.ProductDetailActivity;
-import com.sametozkan.storeapp.util.Constants;
+import com.sametozkan.storeapp.util.IntentConstants;
 
 import java.util.List;
 
@@ -73,7 +73,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         @Override
         public void onProductClicked(Product product) {
             final Intent intent = new Intent(context, ProductDetailActivity.class);
-            intent.putExtra(Constants.PRODUCT_ID, product.getId());
+            intent.putExtra(IntentConstants.PRODUCT_ID, product.getId());
             context.startActivity(intent);
         }
     }

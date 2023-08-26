@@ -1,4 +1,4 @@
-package com.sametozkan.storeapp;
+package com.sametozkan.storeapp.util;
 
 import android.util.Log;
 import android.view.View;
@@ -10,10 +10,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
+import com.sametozkan.storeapp.R;
 import com.sametozkan.storeapp.domain.model.Product;
 import com.sametozkan.storeapp.domain.model.User;
 import com.sametozkan.storeapp.presentation.categoryList.CategoryListAdapter;
 import com.sametozkan.storeapp.presentation.home.adapter.ProductAdapter;
+import com.sametozkan.storeapp.presentation.orderdetail.OrderDetailAdapter;
+import com.sametozkan.storeapp.presentation.pastorders.PastOrdersAdapter;
 import com.sametozkan.storeapp.presentation.shoppingcart.ShoppingCartAdapter;
 
 import java.util.List;
@@ -27,23 +30,21 @@ public class BindingAdapter {
     public static void submitList(RecyclerView recyclerView, List list) {
         RecyclerView.Adapter adapter = recyclerView.getAdapter();
         if (adapter != null) {
-            if(adapter instanceof ProductAdapter){
+            if (adapter instanceof ProductAdapter) {
                 ((ProductAdapter) adapter).setProductList(list);
-            }
-            else if(adapter instanceof CategoryListAdapter){
+            } else if (adapter instanceof CategoryListAdapter) {
                 ((CategoryListAdapter) adapter).setCategoryList(list);
-            }
-            else if(adapter instanceof ShoppingCartAdapter){
+            } else if (adapter instanceof ShoppingCartAdapter) {
                 ((ShoppingCartAdapter) adapter).setProductList(list);
+            } else if (adapter instanceof PastOrdersAdapter) {
+                ((PastOrdersAdapter) adapter).setOrderList(list);
+            } else if (adapter instanceof OrderDetailAdapter) {
+                ((OrderDetailAdapter) adapter).setProductList(list);
+            } else {
+                Log.e(TAG, "submitList: ", new Throwable("Adapter cast exception!"));
             }
         }
     }
-
-    /*@androidx.databinding.BindingAdapter("submitCategoryList")
-    public static void submitCategoryList(RecyclerView recyclerView, List<String> list) {
-        if (recyclerView.getAdapter() != null) {
-        }
-    }*/
 
     @androidx.databinding.BindingAdapter("setAdapter")
     public static void setAdapter(RecyclerView recyclerView, RecyclerView.Adapter adapter) {
@@ -58,8 +59,8 @@ public class BindingAdapter {
     }
 
     @androidx.databinding.BindingAdapter("bindUser")
-    public static void bindUser(NavigationView navigationView, User user){
-        if(user != null){
+    public static void bindUser(NavigationView navigationView, User user) {
+        if (user != null) {
             View headerView = navigationView.getHeaderView(0);
             TextView fullName = headerView.findViewById(R.id.fullName);
             TextView email = headerView.findViewById(R.id.email);

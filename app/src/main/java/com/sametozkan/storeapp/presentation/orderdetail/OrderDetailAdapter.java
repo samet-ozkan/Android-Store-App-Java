@@ -1,4 +1,4 @@
-package com.sametozkan.storeapp.presentation.shoppingcart;
+package com.sametozkan.storeapp.presentation.orderdetail;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -8,12 +8,12 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sametozkan.storeapp.R;
-import com.sametozkan.storeapp.databinding.ItemCartProductBinding;
+import com.sametozkan.storeapp.databinding.ItemProductLinearBinding;
 import com.sametozkan.storeapp.domain.model.Product;
 
 import java.util.List;
 
-public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapter.ViewHolder> {
+public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.ViewHolder> {
 
     private List<Product> productList;
 
@@ -26,21 +26,22 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         notifyDataSetChanged();
     }
 
-    private ShoppingCartClickListener shoppingCartClickListener;
-    public ShoppingCartAdapter(ShoppingCartClickListener shoppingCartClickListener){
-        this.shoppingCartClickListener = shoppingCartClickListener;
+    private ProductClickListener productClickListener;
+
+    public OrderDetailAdapter(ProductClickListener productClickListener) {
+        this.productClickListener = productClickListener;
     }
 
     @NonNull
     @Override
-    public ShoppingCartAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemCartProductBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
-                R.layout.item_cart_product, parent, false);
+    public OrderDetailAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        ItemProductLinearBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
+                R.layout.item_product_linear, parent, false);
         return new ViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ShoppingCartAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull OrderDetailAdapter.ViewHolder holder, int position) {
         Product product = productList.get(holder.getAdapterPosition());
         holder.bindItem(product);
     }
@@ -50,18 +51,18 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         return (productList == null) ? 0 : productList.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final ItemCartProductBinding binding;
+        private ItemProductLinearBinding binding;
 
-        public ViewHolder(@NonNull ItemCartProductBinding binding) {
+        public ViewHolder(ItemProductLinearBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
 
         public void bindItem(Product product) {
             binding.setProduct(product);
-            binding.setItemClickListener(shoppingCartClickListener);
+            binding.setItemClickListener(productClickListener);
         }
     }
 }

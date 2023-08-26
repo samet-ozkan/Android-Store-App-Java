@@ -3,7 +3,6 @@ package com.sametozkan.storeapp.presentation.categoryList;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -14,7 +13,7 @@ import com.sametozkan.storeapp.R;
 import com.sametozkan.storeapp.databinding.ItemCategoryListBinding;
 import com.sametozkan.storeapp.presentation.category.CategoryActivity;
 import com.sametozkan.storeapp.presentation.category.CategoryClickListener;
-import com.sametozkan.storeapp.util.Constants;
+import com.sametozkan.storeapp.util.IntentConstants;
 
 import java.util.List;
 
@@ -72,7 +71,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         @Override
         public void onCategoryClicked(String categoryName) {
             final Intent intent = new Intent(context, CategoryActivity.class);
-            intent.putExtra(Constants.CATEGORY, categoryName);
+            intent.putExtra(IntentConstants.CATEGORY, categoryName);
             context.startActivity(intent);
         }
     }

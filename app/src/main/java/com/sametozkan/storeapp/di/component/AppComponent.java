@@ -10,6 +10,8 @@ import com.sametozkan.storeapp.presentation.authentication.AuthActivity;
 import com.sametozkan.storeapp.presentation.category.CategoryActivity;
 import com.sametozkan.storeapp.presentation.categoryList.CategoryListFragment;
 import com.sametozkan.storeapp.presentation.home.HomeFragment;
+import com.sametozkan.storeapp.presentation.orderdetail.OrderDetailActivity;
+import com.sametozkan.storeapp.presentation.pastorders.PastOrdersFragment;
 import com.sametozkan.storeapp.presentation.product.ProductDetailActivity;
 import com.sametozkan.storeapp.presentation.shoppingcart.ShoppingCartFragment;
 
@@ -32,12 +34,16 @@ public interface AppComponent {
 
     void inject(ProductDetailActivity productDetailActivity);
 
-    void inject(HomeFragment homeFragment);
-
     void inject(CategoryActivity categoryActivity);
+
+    void inject(OrderDetailActivity orderDetailActivity);
+
+    void inject(HomeFragment homeFragment);
 
     void inject(CategoryListFragment categoryListFragment);
 
     void inject(ShoppingCartFragment shoppingCartFragment);
+
+    void inject(PastOrdersFragment pastOrdersFragment);
 
 }

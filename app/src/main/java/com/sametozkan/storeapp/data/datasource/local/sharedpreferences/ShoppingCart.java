@@ -41,6 +41,10 @@ public class ShoppingCart {
         return sharedPreferences.getStringSet(CART_KEY, new HashSet<>());
     }
 
+    public void clearCart(){
+        saveCartItem(new HashSet<>());
+    }
+
     private void saveCartItem(Set<String> cartItems) {
         sharedPreferences.edit().putStringSet(CART_KEY, cartItems).apply();
     }

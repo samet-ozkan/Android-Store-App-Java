@@ -1,12 +1,8 @@
 package com.sametozkan.storeapp.presentation.category;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -15,12 +11,9 @@ import androidx.lifecycle.ViewModelProvider;
 import com.sametozkan.storeapp.MyApplication;
 import com.sametozkan.storeapp.R;
 import com.sametozkan.storeapp.databinding.ActivityCategoryBinding;
-import com.sametozkan.storeapp.domain.model.Product;
 import com.sametozkan.storeapp.presentation.ViewModelFactory;
 import com.sametozkan.storeapp.presentation.home.adapter.ProductAdapter;
-import com.sametozkan.storeapp.util.Constants;
-
-import java.util.List;
+import com.sametozkan.storeapp.util.IntentConstants;
 
 import javax.inject.Inject;
 
@@ -59,15 +52,15 @@ public class CategoryActivity extends AppCompatActivity {
     }
 
     private boolean checkExtras() {
-        if (getIntent().getExtras() != null && getIntent().getStringExtra(Constants.CATEGORY) != null) {
+        if (getIntent().getExtras() != null && getIntent().getStringExtra(IntentConstants.CATEGORY) != null) {
             return true;
         }
         return false;
     }
 
     private void fetchData() {
-        Log.d(TAG, "fetchData: " + getIntent().getStringExtra(Constants.CATEGORY));
-        categoryViewModel.fetchProductsByCategory(getIntent().getStringExtra(Constants.CATEGORY));
+        Log.d(TAG, "fetchData: " + getIntent().getStringExtra(IntentConstants.CATEGORY));
+        categoryViewModel.fetchProductsByCategory(getIntent().getStringExtra(IntentConstants.CATEGORY));
     }
 
     private void setRecyclerView() {

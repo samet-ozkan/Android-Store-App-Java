@@ -25,6 +25,7 @@ import com.sametozkan.storeapp.domain.usecase.GetAllProductsUseCase;
 import com.sametozkan.storeapp.presentation.categoryList.CategoryListFragment;
 import com.sametozkan.storeapp.presentation.home.HomeFragment;
 import com.sametozkan.storeapp.presentation.home.HomeViewModel;
+import com.sametozkan.storeapp.presentation.pastorders.PastOrdersFragment;
 import com.sametozkan.storeapp.presentation.shoppingcart.ShoppingCartFragment;
 import com.sametozkan.storeapp.util.Callback;
 
@@ -82,11 +83,13 @@ public class MainActivity extends AppCompatActivity {
             } else if (itemId == R.id.categories) {
                 fragment = new CategoryListFragment();
                 Log.d(TAG, "onCreate: Categories clicked!");
-            }
-            else if (itemId == R.id.shoppingCart){
+            } else if (itemId == R.id.shoppingCart) {
                 fragment = new ShoppingCartFragment();
                 Log.d(TAG, "setNavigationItemClickListener: ShoppingCart clicked!");
-            }else {
+            } else if (itemId == R.id.pastOrders) {
+                fragment = new PastOrdersFragment();
+                Log.d(TAG, "setNavigationItemClickListener: PastOrders clicked!");
+            } else {
                 return false;
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment).commit();
