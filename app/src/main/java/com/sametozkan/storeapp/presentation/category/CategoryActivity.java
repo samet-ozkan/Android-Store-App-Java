@@ -2,6 +2,7 @@ package com.sametozkan.storeapp.presentation.category;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import com.sametozkan.storeapp.databinding.ActivityCategoryBinding;
 import com.sametozkan.storeapp.presentation.ViewModelFactory;
 import com.sametozkan.storeapp.presentation.home.adapter.ProductAdapter;
 import com.sametozkan.storeapp.util.IntentConstants;
+import com.sametozkan.storeapp.util.Utils;
 
 import javax.inject.Inject;
 
@@ -36,19 +38,10 @@ public class CategoryActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_category);
         binding.setLifecycleOwner(this);
         binding.setCategoryViewModel(categoryViewModel);
-        //binding.setList((categoryViewModel.getProductList().getValue()));
         if (checkExtras()) {
             setRecyclerView();
             fetchData();
-            //observeData();
         }
-    }
-
-    private void observeData(){
-        categoryViewModel.getProductList().observe(this, products -> {
-            Log.d(TAG, "observeData: " + products);
-            binding.setCategoryViewModel(categoryViewModel);
-        });
     }
 
     private boolean checkExtras() {

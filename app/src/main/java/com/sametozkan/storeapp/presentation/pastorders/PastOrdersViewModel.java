@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel;
 import com.sametozkan.storeapp.domain.model.Order;
 import com.sametozkan.storeapp.domain.usecase.GetPastOrdersUseCase;
 import com.sametozkan.storeapp.util.Callback;
+import com.sametozkan.storeapp.util.States;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,8 @@ public class PastOrdersViewModel extends ViewModel {
         return pastOrders;
     }
 
+    private final MutableLiveData<States> state = new MutableLiveData<>(States.LOADING);
+
     @Inject
     public PastOrdersViewModel(GetPastOrdersUseCase getPastOrdersUseCase) {
         this.getPastOrdersUseCase = getPastOrdersUseCase;
@@ -38,6 +41,7 @@ public class PastOrdersViewModel extends ViewModel {
             @Override
             public void onSuccess(List<Order> result) {
                 pastOrders.postValue(result);
+                state.postValue(States.SUCCESS);
             }
 
             @Override
@@ -45,5 +49,9 @@ public class PastOrdersViewModel extends ViewModel {
                 Log.e(TAG, "onFailure: " + errorMessage);
             }
         });
+    }
+
+    public LiveData<States> getState() {
+        return state;
     }
 }

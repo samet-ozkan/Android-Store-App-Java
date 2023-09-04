@@ -22,6 +22,8 @@ import com.sametozkan.storeapp.presentation.ViewModelFactory;
 import com.sametozkan.storeapp.presentation.product.ProductDetailActivity;
 import com.sametozkan.storeapp.util.Callback;
 import com.sametozkan.storeapp.util.IntentConstants;
+import com.sametozkan.storeapp.util.States;
+import com.sametozkan.storeapp.util.Utils;
 
 import javax.inject.Inject;
 
@@ -66,6 +68,7 @@ public class ShoppingCartFragment extends Fragment implements ShoppingCartClickL
             public void onSuccess(Void result) {
                 viewModel.clearCart(getContext());
                 viewModel.fetchCartItems(getContext());
+                viewModel.getState().setValue(States.SUCCESS);
                 Toast.makeText(getContext(), "Order confirmed successfully!", Toast.LENGTH_LONG).show();
             }
 

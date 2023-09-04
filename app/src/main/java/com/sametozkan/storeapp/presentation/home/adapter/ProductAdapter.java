@@ -15,11 +15,13 @@ import com.sametozkan.storeapp.R;
 import com.sametozkan.storeapp.domain.model.Product;
 import com.sametozkan.storeapp.presentation.product.ProductDetailActivity;
 import com.sametozkan.storeapp.util.IntentConstants;
+import com.sametozkan.storeapp.util.ListAdapter;
 
 import java.util.List;
 
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder>
+implements ListAdapter {
 
     private static final String TAG = "ProductAdapter";
 
@@ -54,6 +56,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public int getItemCount() {
         return (productList == null) ? 0 : productList.size();
+    }
+
+    @Override
+    public void setList(List list) {
+        setProductList(list);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements ProductClickListener {

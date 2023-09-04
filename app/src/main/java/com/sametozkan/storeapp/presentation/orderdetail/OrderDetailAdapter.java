@@ -10,10 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.sametozkan.storeapp.R;
 import com.sametozkan.storeapp.databinding.ItemProductLinearBinding;
 import com.sametozkan.storeapp.domain.model.Product;
+import com.sametozkan.storeapp.util.ListAdapter;
 
 import java.util.List;
 
-public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.ViewHolder> {
+public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.ViewHolder>
+implements ListAdapter {
 
     private List<Product> productList;
 
@@ -49,6 +51,11 @@ public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.
     @Override
     public int getItemCount() {
         return (productList == null) ? 0 : productList.size();
+    }
+
+    @Override
+    public void setList(List list) {
+        setProductList(list);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

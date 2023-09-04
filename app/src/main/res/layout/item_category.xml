@@ -8,6 +8,13 @@
         <import type="java.util.List"/>
         <import type="com.sametozkan.storeapp.domain.model.Product"/>
 
+        <import type="com.sametozkan.storeapp.util.States"/>
+        <import type="android.view.View"/>
+
+        <variable
+            name="state"
+            type="States" />
+
         <variable
             name="categoryName"
             type="java.lang.String" />
@@ -57,15 +64,31 @@
 
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/categoryRv"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:setAdapter="@{adapter}"
-            app:submitList="@{list}"
-            tools:listitem="@layout/item_product" />
+            android:layout_height="wrap_content">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/categoryRv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:setAdapter="@{adapter}"
+                app:submitList="@{list}"
+                android:visibility="@{(state == States.SUCCESS) ? View.VISIBLE : View.INVISIBLE}"
+                tools:listitem="@layout/item_product" />
+
+            <include
+                layout="@layout/states"
+                app:state="@{state}"
+                android:layout_width="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+
 
     </LinearLayout>
 </layout>

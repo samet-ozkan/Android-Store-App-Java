@@ -5,6 +5,9 @@
 
     <data>
 
+        <import type="com.sametozkan.storeapp.util.States"/>
+        <import type="android.view.View"/>
+
         <variable
             name="categoryViewModel"
             type="com.sametozkan.storeapp.presentation.category.CategoryViewModel" />
@@ -14,21 +17,40 @@
             type="com.sametozkan.storeapp.presentation.home.adapter.ProductAdapter" />
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/productRv"
+        <LinearLayout
             android:layout_width="match_parent"
+            android:id="@+id/view"
+            android:visibility="@{(categoryViewModel.state == States.SUCCESS) ? View.VISIBLE : View.GONE}"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="2"
-            app:setAdapter="@{adapter}"
-            app:submitList="@{categoryViewModel.productList}"
-            tools:listitem="@layout/item_product" />
-    </LinearLayout>
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/productRv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:setAdapter="@{adapter}"
+                app:spanCount="2"
+                app:submitList="@{categoryViewModel.productList}"
+                tools:listitem="@layout/item_product" />
+
+        </LinearLayout>
+
+
+        <include
+            layout="@layout/states"
+            app:state="@{categoryViewModel.state}"
+            android:id="@+id/states"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
+
 
 </layout>

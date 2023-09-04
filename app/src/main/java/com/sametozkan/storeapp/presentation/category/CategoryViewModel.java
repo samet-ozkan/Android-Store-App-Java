@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.sametozkan.storeapp.domain.model.Product;
 import com.sametozkan.storeapp.domain.usecase.GetProductsByCategoryUseCase;
+import com.sametozkan.storeapp.util.States;
 
 import java.util.List;
 
@@ -23,15 +24,16 @@ public class CategoryViewModel extends ViewModel {
 
     private CompositeDisposable compositeDisposable;
     private GetProductsByCategoryUseCase getProductsByCategoryUseCase;
-    public final MutableLiveData<List<Product>> productList = new MutableLiveData<>();
+    private final MutableLiveData<List<Product>> productList = new MutableLiveData<>();
+    private final MutableLiveData<States> state = new MutableLiveData<>(States.LOADING);
 
     @Inject
-    public CategoryViewModel(GetProductsByCategoryUseCase getProductsByCategoryUseCase){
+    public CategoryViewModel(GetProductsByCategoryUseCase getProductsByCategoryUseCase) {
         compositeDisposable = new CompositeDisposable();
         this.getProductsByCategoryUseCase = getProductsByCategoryUseCase;
     }
 
-    public void fetchProductsByCategory(String category){
+    public void fetchProductsByCategory(String category) {
         compositeDisposable.add(
                 getProductsByCategoryUseCase.execute(category)
                         .subscribeOn(Schedulers.io())
@@ -39,6 +41,7 @@ public class CategoryViewModel extends ViewModel {
                         .subscribe(products -> {
                             productList.postValue(products);
                             Log.d(TAG, "fetchProductsByCategory: " + products);
+                            state.postValue(States.SUCCESS);
                         }, throwable -> {
                             Log.e(TAG, "fetchProductsByCategory: ", throwable);
                         }));
@@ -46,6 +49,10 @@ public class CategoryViewModel extends ViewModel {
 
     public LiveData<List<Product>> getProductList() {
         return productList;
+    }
+
+    public MutableLiveData<States> getState() {
+        return state;
     }
 
     @Override

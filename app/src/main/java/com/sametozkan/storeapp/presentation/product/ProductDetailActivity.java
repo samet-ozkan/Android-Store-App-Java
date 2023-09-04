@@ -14,6 +14,7 @@ import com.sametozkan.storeapp.data.datasource.local.sharedpreferences.ShoppingC
 import com.sametozkan.storeapp.databinding.ActivityProductDetailBinding;
 import com.sametozkan.storeapp.presentation.ViewModelFactory;
 import com.sametozkan.storeapp.util.IntentConstants;
+import com.sametozkan.storeapp.util.Utils;
 
 import javax.inject.Inject;
 
@@ -33,6 +34,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         super.onCreate(savedInstanceState);
         ((MyApplication) getApplication()).getAppComponent().inject(this);
         activityProductDetailBinding = DataBindingUtil.setContentView(this, R.layout.activity_product_detail);
+        activityProductDetailBinding.setLifecycleOwner(this);
         setViewModel();
         checkIntent();
         observeProductById();
@@ -46,6 +48,7 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
 
     private void setViewModel() {
         productDetailViewModel = new ViewModelProvider(this, viewModelFactory).get(ProductDetailViewModel.class);
+        activityProductDetailBinding.setViewModel(productDetailViewModel);
     }
 
     private void checkIntent() {

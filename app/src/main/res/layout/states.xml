@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <data>
+
+        <import type="com.sametozkan.storeapp.util.States"/>
+        <import type="android.view.View"/>
+
+        <variable
+            name="state"
+            type="com.sametozkan.storeapp.util.States" />
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/empty"
+            layout="@layout/view_empty"
+            android:visibility="@{(state == States.EMPTY) ? View.VISIBLE : View.GONE}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
+        <include
+            android:id="@+id/loading"
+            layout="@layout/view_loading"
+            android:visibility="@{(state == States.LOADING) ? View.VISIBLE : View.GONE}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
+        <include
+            android:id="@+id/error"
+            layout="@layout/view_error"
+            android:visibility="@{(state == States.ERROR) ? View.VISIBLE : View.GONE}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
+</layout>

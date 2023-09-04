@@ -5,52 +5,72 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        
+
+        <import type="com.sametozkan.storeapp.util.States"/>
+        <import type="android.view.View"/>
+
         <variable
             name="viewModel"
             type="com.sametozkan.storeapp.presentation.orderdetail.OrderDetailViewModel" />
-        
+
         <variable
             name="adapter"
             type="com.sametozkan.storeapp.presentation.orderdetail.OrderDetailAdapter" />
 
     </data>
 
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/productsRv"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.9"
-            app:submitList="@{viewModel.productList}"
-            app:setAdapter="@{adapter}"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:orientation="vertical"
-            tools:listitem="@layout/item_product_linear" />
+            android:layout_height="match_parent"
+            android:id="@+id/view"
+            android:visibility="@{(viewModel.state == States.SUCCESS) ? View.VISIBLE : View.GONE}"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/totalAmount"
-            style="@style/Title"
-            android:layout_width="match_parent"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/productsRv"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.9"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:setAdapter="@{adapter}"
+                app:submitList="@{viewModel.productList}"
+                tools:listitem="@layout/item_product_linear" />
+
+            <TextView
+                android:id="@+id/totalAmount"
+                style="@style/Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.05"
+                android:gravity="center"
+                android:text="@{`$` + String.valueOf(viewModel.order.totalAmount)}"
+                tools:text="$999.99" />
+
+            <TextView
+                android:id="@+id/date"
+                style="@style/Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.05"
+                android:gravity="center"
+                android:text="@{viewModel.order.date}"
+                tools:text="27 Jun 2023" />
+        </LinearLayout>
+
+        <include
+            layout="@layout/states"
+            android:id="@+id/states"
+            app:state="@{viewModel.state}"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.05"
-            android:gravity="center"
-            android:text="@{`$` + String.valueOf(viewModel.order.totalAmount)}"
-            tools:text="$999.99" />
+            android:layout_centerInParent="true" />
 
-        <TextView
-            android:id="@+id/date"
-            style="@style/Text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.05"
-            android:gravity="center"
-            android:text="@{viewModel.order.date}"
-            tools:text="27 Jun 2023" />
-    </LinearLayout>
+    </RelativeLayout>
+
+
 </layout>

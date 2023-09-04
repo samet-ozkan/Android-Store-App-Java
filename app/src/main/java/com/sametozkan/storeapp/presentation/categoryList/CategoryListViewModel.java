@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.sametozkan.storeapp.domain.usecase.GetCategoryListUseCase;
+import com.sametozkan.storeapp.util.States;
 
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class CategoryListViewModel extends ViewModel {
     private CompositeDisposable disposable;
     private GetCategoryListUseCase getCategoryListUseCase;
     private MutableLiveData<List<String>> categoryList = new MutableLiveData<>();
+    private MutableLiveData<States> state = new MutableLiveData<>(States.LOADING);
 
     @Inject
     public CategoryListViewModel(GetCategoryListUseCase getCategoryListUseCase) {
@@ -37,6 +39,7 @@ public class CategoryListViewModel extends ViewModel {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe((strings, throwable) -> {
                     categoryList.postValue(strings);
+                    state.postValue(States.SUCCESS);
                     if (throwable != null)
                         Log.e(TAG, "fetchCategoryListUseCase: ", throwable);
                 }));
@@ -44,6 +47,10 @@ public class CategoryListViewModel extends ViewModel {
 
     public LiveData<List<String>> getCategoryList() {
         return categoryList;
+    }
+
+    public LiveData<States> getState() {
+        return state;
     }
 
     @Override

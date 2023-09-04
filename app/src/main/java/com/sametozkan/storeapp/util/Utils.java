@@ -1,11 +1,18 @@
 package com.sametozkan.storeapp.util;
 
+import android.view.View;
+
+import com.sametozkan.storeapp.R;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.UUID;
+
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.annotations.Nullable;
 
 public class Utils {
 

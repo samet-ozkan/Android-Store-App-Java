@@ -10,6 +10,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.sametozkan.storeapp.domain.model.Product;
 import com.sametozkan.storeapp.domain.usecase.GetCurrentUserUseCase;
 import com.sametozkan.storeapp.domain.usecase.GetProductByIdUseCase;
+import com.sametozkan.storeapp.util.States;
 
 import javax.inject.Inject;
 
@@ -26,6 +27,7 @@ public class ProductDetailViewModel extends ViewModel {
     private CompositeDisposable disposable;
     private GetProductByIdUseCase getProductByIdUseCase;
     private GetCurrentUserUseCase getCurrentUserUseCase;
+    private final MutableLiveData<States> state = new MutableLiveData<>(States.LOADING);
 
     @Inject
     public ProductDetailViewModel(GetProductByIdUseCase getProductByIdUseCase,
@@ -49,11 +51,16 @@ public class ProductDetailViewModel extends ViewModel {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe((product1) -> {
                     this.product.postValue(product1);
+                    state.postValue(States.SUCCESS);
                 }));
     }
 
     public LiveData<Product> getProduct() {
         return product;
+    }
+
+    public LiveData<States> getState() {
+        return state;
     }
 
     @Override

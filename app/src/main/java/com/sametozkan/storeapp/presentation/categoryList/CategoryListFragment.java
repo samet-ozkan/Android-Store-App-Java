@@ -15,6 +15,7 @@ import com.sametozkan.storeapp.MyApplication;
 import com.sametozkan.storeapp.R;
 import com.sametozkan.storeapp.databinding.FragmentCategoryListBinding;
 import com.sametozkan.storeapp.presentation.ViewModelFactory;
+import com.sametozkan.storeapp.util.Utils;
 
 import javax.inject.Inject;
 

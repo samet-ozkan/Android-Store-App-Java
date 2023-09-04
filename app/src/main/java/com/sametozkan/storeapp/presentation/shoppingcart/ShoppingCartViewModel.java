@@ -15,6 +15,7 @@ import com.sametozkan.storeapp.domain.usecase.ConfirmOrderUseCase;
 import com.sametozkan.storeapp.domain.usecase.GetCurrentUserUseCase;
 import com.sametozkan.storeapp.domain.usecase.GetProductByIdUseCase;
 import com.sametozkan.storeapp.util.Callback;
+import com.sametozkan.storeapp.util.States;
 import com.sametozkan.storeapp.util.Utils;
 
 import java.util.List;
@@ -37,6 +38,7 @@ public class ShoppingCartViewModel extends ViewModel {
     private GetCurrentUserUseCase getCurrentUserUseCase;
 
     private ConfirmOrderUseCase confirmOrderUseCase;
+    private final MutableLiveData<States> state = new MutableLiveData<>(States.LOADING);
     private final MutableLiveData<List<Product>> productList = new MutableLiveData<>();
     private final MutableLiveData<Double> totalAmount = new MutableLiveData<>(0d);
 
@@ -72,6 +74,11 @@ public class ShoppingCartViewModel extends ViewModel {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(products -> {
                     productList.postValue(products);
+                    if (products.isEmpty()) {
+                        state.postValue(States.EMPTY);
+                    } else {
+                        state.postValue(States.SUCCESS);
+                    }
                     Log.d(TAG, "fetchCartItems: " + products);
                 }));
     }
@@ -101,6 +108,11 @@ public class ShoppingCartViewModel extends ViewModel {
         Order order = new Order(Utils.generateRandomId(), productIds, totalAmount.getValue(),
                 Utils.convertTimestampToDate(Utils.getTimestamp()));
         confirmOrderUseCase.execute(order, callback);
+        state.postValue(States.LOADING);
+    }
+
+    public MutableLiveData<States> getState() {
+        return state;
     }
 
     @Override

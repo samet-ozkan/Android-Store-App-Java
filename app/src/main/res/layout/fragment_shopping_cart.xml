@@ -6,6 +6,9 @@
 
     <data>
 
+        <import type="com.sametozkan.storeapp.util.States"/>
+        <import type="android.view.View"/>
+
         <variable
             name="viewModel"
             type="com.sametozkan.storeapp.presentation.shoppingcart.ShoppingCartViewModel" />
@@ -19,47 +22,65 @@
             type="com.sametozkan.storeapp.presentation.shoppingcart.ShoppingCartClickListener" />
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/cartRv"
-            setAdapter="@{shoppingCartAdapter}"
-            submitList="@{viewModel.productList}"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="9"
-            android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_cart_product" />
+        android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/view"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:visibility="@{(viewModel.state == States.SUCCESS) ? View.VISIBLE : View.GONE}"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/totalAmount"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:text="@{`$` + String.valueOf(viewModel.totalAmount)}"
-                tools:text="$35.99" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/cartRv"
+                setAdapter="@{shoppingCartAdapter}"
+                submitList="@{viewModel.productList}"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="9"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_cart_product" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/confirmOrder"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="7"
-                android:onClick="@{() -> clickListener.onConfirmOrderClicked()}"
-                android:text="Confirm Order" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/totalAmount"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="@{`$` + String.valueOf(viewModel.totalAmount)}"
+                    tools:text="$35.99" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/confirmOrder"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="7"
+                    android:onClick="@{() -> clickListener.onConfirmOrderClicked()}"
+                    android:text="Confirm Order" />
+
+            </LinearLayout>
+
 
         </LinearLayout>
 
+        <include
+            layout="@layout/states"
+            android:id="@+id/states"
+            app:state="@{viewModel.state}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
 
-    </LinearLayout>
+    </RelativeLayout>
+
+
 </layout>

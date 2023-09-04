@@ -20,6 +20,7 @@ import com.sametozkan.storeapp.domain.model.Product;
 import com.sametozkan.storeapp.presentation.ViewModelFactory;
 import com.sametozkan.storeapp.presentation.product.ProductDetailActivity;
 import com.sametozkan.storeapp.util.IntentConstants;
+import com.sametozkan.storeapp.util.Utils;
 
 import javax.inject.Inject;
 

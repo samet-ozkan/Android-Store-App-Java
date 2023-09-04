@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="com.sametozkan.storeapp.util.Categories"/>
+
         <variable
             name="viewModel"
             type="com.sametozkan.storeapp.presentation.home.HomeViewModel" />
@@ -27,27 +29,31 @@
                 android:id="@+id/mensClothing"
                 categoryClickListener="@{categoryClickListener}"
                 layout="@layout/item_category"
-                list="@{viewModel.mensClothingList}" />
+                state="@{viewModel.getState(Categories.MENS_CLOTHING)}"
+                list="@{viewModel.getProductList(Categories.MENS_CLOTHING)}" />
 
             <include
                 android:id="@+id/womensClothing"
                 categoryClickListener="@{categoryClickListener}"
                 layout="@layout/item_category"
-                list="@{viewModel.womensClothingList}" />
+                state="@{viewModel.getState(Categories.WOMENS_CLOTHING)}"
+                list="@{viewModel.getProductList(Categories.WOMENS_CLOTHING)}" />
 
 
             <include
                 android:id="@+id/jewelery"
                 categoryClickListener="@{categoryClickListener}"
                 layout="@layout/item_category"
-                list="@{viewModel.jeweleryList}" />
+                state="@{viewModel.getState(Categories.JEWELERY)}"
+                list="@{viewModel.getProductList(Categories.JEWELERY)}" />
 
 
             <include
                 android:id="@+id/electronics"
                 categoryClickListener="@{categoryClickListener}"
                 layout="@layout/item_category"
-                list="@{viewModel.electronicsList}" />
+                state="@{viewModel.getState(Categories.ELECTRONICS)}"
+                list="@{viewModel.getProductList(Categories.ELECTRONICS)}" />
 
 
         </LinearLayout>

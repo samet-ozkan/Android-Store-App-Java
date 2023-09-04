@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <import type="com.sametozkan.storeapp.util.States"/>
+        <import type="android.view.View"/>
 
         <variable
             name="viewModel"
@@ -15,21 +18,38 @@
             type="com.sametozkan.storeapp.presentation.pastorders.PastOrdersAdapter" />
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/pastOrdersRv"
-            setAdapter="@{adapter}"
-            submitList="@{viewModel.pastOrders}"
+        <LinearLayout
+            android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_order" />
+            android:visibility="@{(viewModel.state == States.SUCCESS) ? View.VISIBLE : View.GONE}"
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/pastOrdersRv"
+                setAdapter="@{adapter}"
+                submitList="@{viewModel.pastOrders}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_order" />
+
+        </LinearLayout>
+
+        <include
+            layout="@layout/states"
+            android:id="@+id/states"
+            app:state="@{viewModel.state}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
+
 
 </layout>

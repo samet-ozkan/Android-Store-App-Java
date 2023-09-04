@@ -5,6 +5,10 @@
 
     <data>
 
+        <import type="com.sametozkan.storeapp.util.States" />
+
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.sametozkan.storeapp.presentation.categoryList.CategoryListViewModel" />
@@ -15,20 +19,35 @@
 
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/categoriesRv"
+        <LinearLayout
+            android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:setAdapter="@{adapter}"
-            app:submitList="@{viewModel.categoryList}" />
+            android:visibility="@{(viewModel.state == States.SUCCESS) ? View.VISIBLE : View.GONE}">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/categoriesRv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:setAdapter="@{adapter}"
+                app:submitList="@{viewModel.categoryList}" />
 
-    </LinearLayout>
+        </LinearLayout>
+
+        <include
+            android:id="@+id/states"
+            layout="@layout/states"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            app:state="@{viewModel.state}" />
+
+    </RelativeLayout>
 </layout>

@@ -30,19 +30,13 @@ public class BindingAdapter {
     public static void submitList(RecyclerView recyclerView, List list) {
         RecyclerView.Adapter adapter = recyclerView.getAdapter();
         if (adapter != null) {
-            if (adapter instanceof ProductAdapter) {
-                ((ProductAdapter) adapter).setProductList(list);
-            } else if (adapter instanceof CategoryListAdapter) {
-                ((CategoryListAdapter) adapter).setCategoryList(list);
-            } else if (adapter instanceof ShoppingCartAdapter) {
-                ((ShoppingCartAdapter) adapter).setProductList(list);
-            } else if (adapter instanceof PastOrdersAdapter) {
-                ((PastOrdersAdapter) adapter).setOrderList(list);
-            } else if (adapter instanceof OrderDetailAdapter) {
-                ((OrderDetailAdapter) adapter).setProductList(list);
+            if (adapter instanceof ListAdapter) {
+                ((ListAdapter) adapter).setList(list);
             } else {
-                Log.e(TAG, "submitList: ", new Throwable("Adapter cast exception!"));
+                Log.e(TAG, "submitList: ", new Throwable("Unsupported adapter"));
             }
+        } else {
+            Log.e(TAG, "submitList: ", new Throwable("Null adapter"));
         }
     }
 

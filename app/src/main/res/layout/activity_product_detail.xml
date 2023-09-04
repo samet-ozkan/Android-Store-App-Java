@@ -5,6 +5,9 @@
 
     <data>
 
+        <import type="com.sametozkan.storeapp.util.States"/>
+        <import type="android.view.View"/>
+
         <import type="com.sametozkan.storeapp.domain.model.Product"/>
 
         <variable
@@ -12,63 +15,73 @@
             type="Product" />
 
         <variable
+            name="viewModel"
+            type="com.sametozkan.storeapp.presentation.product.ProductDetailViewModel" />
+
+        <variable
             name="clickListener"
             type="com.sametozkan.storeapp.presentation.product.ProductDetailClickListener" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ScrollView
-            android:id="@+id/scroll"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@id/addToCartLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:id="@+id/view"
+            android:visibility="@{(viewModel.state == States.SUCCESS) ? View.VISIBLE : View.GONE}"
+            android:layout_height="match_parent">
 
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <ScrollView
+                android:id="@+id/scroll"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@id/addToCartLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
-                    android:layout_margin="10dp"
-                    android:id="@+id/productImage"
-                    android:layout_width="250dp"
-                    android:layout_height="250dp"
-                    app:imageUrl="@{product.image}"
-                    app:layout_constraintBottom_toTopOf="@+id/imageDivider"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:src="@drawable/ic_launcher_background" />
 
-                <com.google.android.material.divider.MaterialDivider
-                    android:id="@+id/imageDivider"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="10dp"
-                    app:dividerColor="@color/black"
-                    app:layout_constraintBottom_toTopOf="@id/productTitle"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/productImage" />
+                    android:layout_height="match_parent">
 
-                <TextView
-                    android:layout_margin="10dp"
-                    android:id="@+id/productTitle"
-                    style="@style/Title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{product.title}"
-                    app:layout_constraintBottom_toTopOf="@id/productDescription"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/imageDivider"
-                    tools:text="Product Title" />
+                    <ImageView
+                        android:layout_margin="10dp"
+                        android:id="@+id/productImage"
+                        android:layout_width="250dp"
+                        android:layout_height="250dp"
+                        app:imageUrl="@{product.image}"
+                        app:layout_constraintBottom_toTopOf="@+id/imageDivider"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@drawable/ic_launcher_background" />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:id="@+id/imageDivider"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="10dp"
+                        app:dividerColor="@color/black"
+                        app:layout_constraintBottom_toTopOf="@id/productTitle"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/productImage" />
+
+                    <TextView
+                        android:layout_margin="10dp"
+                        android:id="@+id/productTitle"
+                        style="@style/Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{product.title}"
+                        app:layout_constraintBottom_toTopOf="@id/productDescription"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/imageDivider"
+                        tools:text="Product Title" />
 
                     <TextView
                         android:layout_margin="10dp"
@@ -85,79 +98,91 @@
                         app:layout_constraintTop_toBottomOf="@id/productTitle"/>
 
 
-                <LinearLayout
-                    android:id="@+id/ratingLayout"
-                    android:layout_margin="10dp"
-                    android:layout_width="match_parent"
+                    <LinearLayout
+                        android:id="@+id/ratingLayout"
+                        android:layout_margin="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/productDescription">
+
+                        <ImageView
+                            android:id="@+id/starRate"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="2"
+                            android:src="@drawable/baseline_star_rate_24" />
+
+                        <TextView
+                            android:id="@+id/rate"
+                            style="@style/Title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@{`Rate: ` + String.valueOf(product.rating.rate)}"
+                            tools:text="Rate: 3.5" />
+
+                        <TextView
+                            android:id="@+id/count"
+                            style="@style/Title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@{`Count: ` + String.valueOf(product.rating.count)}"
+                            tools:text="Count: 120" />
+
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </ScrollView>
+
+            <LinearLayout
+                android:id="@+id/addToCartLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/scroll">
+
+                <TextView
+                    android:id="@+id/price"
+                    style="@style/Title"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:gravity="center"
-                    android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/productDescription">
+                    android:text="@{`$` + product.price}"
+                    tools:text="$35.66" />
 
-                    <ImageView
-                        android:id="@+id/starRate"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_weight="2"
-                        android:src="@drawable/baseline_star_rate_24" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/addToCartButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="Add to Cart"
+                    android:onClick="@{() -> clickListener.onAddToCartButtonClicked(product.id)}"/>
 
-                    <TextView
-                        android:id="@+id/rate"
-                        style="@style/Title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@{`Rate: ` + String.valueOf(product.rating.rate)}"
-                        tools:text="Rate: 3.5" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <TextView
-                        android:id="@+id/count"
-                        style="@style/Title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@{`Count: ` + String.valueOf(product.rating.count)}"
-                        tools:text="Count: 120" />
-
-                </LinearLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </ScrollView>
-
-        <LinearLayout
-            android:id="@+id/addToCartLayout"
-            android:layout_width="match_parent"
+        <include
+            layout="@layout/states"
+            android:id="@+id/states"
+            app:state="@{viewModel.state}"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/scroll">
+            android:layout_centerInParent="true" />
 
-            <TextView
-                android:id="@+id/price"
-                style="@style/Title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@{`$` + product.price}"
-                tools:text="$35.66" />
+    </RelativeLayout>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/addToCartButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:text="Add to Cart"
-                android:onClick="@{() -> clickListener.onAddToCartButtonClicked(product.id)}"/>
 
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </layout>

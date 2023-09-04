@@ -13,11 +13,14 @@ import com.sametozkan.storeapp.R;
 import com.sametozkan.storeapp.databinding.ItemCategoryListBinding;
 import com.sametozkan.storeapp.presentation.category.CategoryActivity;
 import com.sametozkan.storeapp.presentation.category.CategoryClickListener;
+import com.sametozkan.storeapp.util.BindingAdapter;
 import com.sametozkan.storeapp.util.IntentConstants;
+import com.sametozkan.storeapp.util.ListAdapter;
 
 import java.util.List;
 
-public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapter.ViewHolder> {
+public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapter.ViewHolder>
+implements ListAdapter {
 
     private Context context;
 
@@ -53,6 +56,12 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
     public int getItemCount() {
         return (categoryList == null) ? 0 : categoryList.size();
     }
+
+    @Override
+    public void setList(List list) {
+        setCategoryList(list);
+    }
+
 
     class ViewHolder extends RecyclerView.ViewHolder implements CategoryClickListener {
 

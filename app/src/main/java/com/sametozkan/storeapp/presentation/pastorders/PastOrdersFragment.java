@@ -19,6 +19,7 @@ import com.sametozkan.storeapp.domain.model.Order;
 import com.sametozkan.storeapp.presentation.ViewModelFactory;
 import com.sametozkan.storeapp.presentation.orderdetail.OrderDetailActivity;
 import com.sametozkan.storeapp.util.IntentConstants;
+import com.sametozkan.storeapp.util.Utils;
 
 import javax.inject.Inject;
 

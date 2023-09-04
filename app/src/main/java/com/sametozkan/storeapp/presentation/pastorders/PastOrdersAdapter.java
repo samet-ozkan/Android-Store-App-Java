@@ -12,10 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.sametozkan.storeapp.R;
 import com.sametozkan.storeapp.databinding.ItemOrderBinding;
 import com.sametozkan.storeapp.domain.model.Order;
+import com.sametozkan.storeapp.util.ListAdapter;
 
 import java.util.List;
 
-public class PastOrdersAdapter extends RecyclerView.Adapter<PastOrdersAdapter.ViewHolder> {
+public class PastOrdersAdapter extends RecyclerView.Adapter<PastOrdersAdapter.ViewHolder>
+implements ListAdapter {
 
     private List<Order> orderList;
 
@@ -51,6 +53,11 @@ public class PastOrdersAdapter extends RecyclerView.Adapter<PastOrdersAdapter.Vi
     @Override
     public int getItemCount() {
         return (orderList == null) ? 0 : orderList.size();
+    }
+
+    @Override
+    public void setList(List list) {
+        setOrderList(list);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

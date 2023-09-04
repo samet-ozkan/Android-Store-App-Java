@@ -12,6 +12,7 @@ import com.sametozkan.storeapp.domain.usecase.GetOrderByIdUseCase;
 import com.sametozkan.storeapp.domain.usecase.GetProductByIdUseCase;
 import com.sametozkan.storeapp.domain.usecase.GetProductListByIdsUseCase;
 import com.sametozkan.storeapp.util.Callback;
+import com.sametozkan.storeapp.util.States;
 
 
 import java.util.List;
@@ -32,6 +33,8 @@ public class OrderDetailViewModel extends ViewModel {
 
     private final MutableLiveData<Order> order = new MutableLiveData<>();
     private final MutableLiveData<List<Product>> productList = new MutableLiveData<>();
+    private final MutableLiveData<States> state = new MutableLiveData<>(States.LOADING);
+
 
     public LiveData<Order> getOrder() {
         return order;
@@ -73,7 +76,12 @@ public class OrderDetailViewModel extends ViewModel {
                 .subscribe(productList1 -> {
                     Log.d(TAG, "fetchProductList: " + productList1);
                     productList.postValue(productList1);
+                    state.postValue(States.SUCCESS);
                 }));
+    }
+
+    public LiveData<States> getState() {
+        return state;
     }
 
     @Override
