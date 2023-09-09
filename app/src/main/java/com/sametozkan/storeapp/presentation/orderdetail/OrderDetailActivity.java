@@ -41,6 +41,7 @@ public class OrderDetailActivity extends AppCompatActivity implements ProductCli
         ((MyApplication) getApplication()).getAppComponent().inject(this);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_order_detail);
         binding.setLifecycleOwner(this);
+        setToolbar();
         if (checkExtras()) {
             setViewModel();
             String orderId = getIntent().getStringExtra(IntentConstants.ORDER_ID);
@@ -48,6 +49,12 @@ public class OrderDetailActivity extends AppCompatActivity implements ProductCli
             observeOrder();
             bindVariables();
         }
+    }
+
+    private void setToolbar() {
+        binding.close.setOnClickListener(view -> {
+            finish();
+        });
     }
 
     private void bindVariables() {

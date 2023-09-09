@@ -14,7 +14,9 @@ import com.sametozkan.storeapp.R;
 import com.sametozkan.storeapp.databinding.ActivityCategoryBinding;
 import com.sametozkan.storeapp.presentation.ViewModelFactory;
 import com.sametozkan.storeapp.presentation.home.adapter.ProductAdapter;
+import com.sametozkan.storeapp.util.Categories;
 import com.sametozkan.storeapp.util.IntentConstants;
+import com.sametozkan.storeapp.util.States;
 import com.sametozkan.storeapp.util.Utils;
 
 import javax.inject.Inject;
@@ -38,25 +40,36 @@ public class CategoryActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_category);
         binding.setLifecycleOwner(this);
         binding.setCategoryViewModel(categoryViewModel);
+        setToolbar();
         if (checkExtras()) {
+            Categories category = (Categories) getIntent().getSerializableExtra(IntentConstants.CATEGORY);
+            binding.toolbarTitle.setText(category.categoryTitle);
             setRecyclerView();
-            fetchData();
+            fetchData(category.category);
+        } else {
+            categoryViewModel.getState().setValue(States.ERROR);
         }
     }
 
     private boolean checkExtras() {
-        if (getIntent().getExtras() != null && getIntent().getStringExtra(IntentConstants.CATEGORY) != null) {
+        if (getIntent().getExtras() != null
+                && getIntent().getSerializableExtra(IntentConstants.CATEGORY) != null) {
             return true;
         }
         return false;
     }
 
-    private void fetchData() {
-        Log.d(TAG, "fetchData: " + getIntent().getStringExtra(IntentConstants.CATEGORY));
-        categoryViewModel.fetchProductsByCategory(getIntent().getStringExtra(IntentConstants.CATEGORY));
+    private void fetchData(String category) {
+        categoryViewModel.fetchProductsByCategory(category);
     }
 
     private void setRecyclerView() {
         binding.setAdapter(new ProductAdapter(this));
+    }
+
+    private void setToolbar() {
+        binding.close.setOnClickListener(view -> {
+            finish();
+        });
     }
 }

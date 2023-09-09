@@ -36,10 +36,17 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         activityProductDetailBinding = DataBindingUtil.setContentView(this, R.layout.activity_product_detail);
         activityProductDetailBinding.setLifecycleOwner(this);
         setViewModel();
+        setToolbar();
         checkIntent();
         observeProductById();
         observeProduct();
         setClickListener();
+    }
+
+    private void setToolbar() {
+        activityProductDetailBinding.close.setOnClickListener(view -> {
+            finish();
+        });
     }
 
     private void setClickListener() {

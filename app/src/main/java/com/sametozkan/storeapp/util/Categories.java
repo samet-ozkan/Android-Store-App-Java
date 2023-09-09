@@ -1,6 +1,8 @@
 package com.sametozkan.storeapp.util;
 
-public enum Categories {
+import java.io.Serializable;
+
+public enum Categories implements Serializable {
 
     MENS_CLOTHING("men's clothing", "Men's Clothing"),
 

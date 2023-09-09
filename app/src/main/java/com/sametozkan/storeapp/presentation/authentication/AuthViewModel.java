@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.AuthResult;
 import com.sametozkan.storeapp.domain.model.User;
+import com.sametozkan.storeapp.domain.usecase.GetCurrentUserUseCase;
 import com.sametozkan.storeapp.domain.usecase.LoginUserUseCase;
 import com.sametozkan.storeapp.domain.usecase.RegisterUserUseCase;
 import com.sametozkan.storeapp.domain.usecase.SaveNewUserUseCase;

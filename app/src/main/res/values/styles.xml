@@ -7,6 +7,12 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <style name="Subtitle">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
     <style name="Text">
         <item name="android:textSize">15sp</item>
         <item name="android:textStyle">normal</item>
@@ -18,4 +24,25 @@
         <item name="android:textStyle">italic</item>
         <item name="android:textColor">@color/black</item>
     </style>
+
+    <style name="TextBackground" parent="Text">
+        <item name="android:background">@drawable/background_text</item>
+        <item name="android:elevation">2dp</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+    <style name="Toolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:elevation">4dp</item>
+
+    </style>
+
+    <style name="TitleBackground" parent="Subtitle">
+        <item name="android:background">@drawable/background_title</item>
+        <item name="android:elevation">4dp</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
 </resources>

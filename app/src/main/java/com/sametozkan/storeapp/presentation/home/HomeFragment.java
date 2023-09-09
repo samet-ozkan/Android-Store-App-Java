@@ -17,12 +17,16 @@ import androidx.lifecycle.ViewModelProvider;
 import com.sametozkan.storeapp.MyApplication;
 import com.sametozkan.storeapp.R;
 import com.sametozkan.storeapp.databinding.FragmentHomeBinding;
+import com.sametozkan.storeapp.databinding.ItemCategoryBinding;
 import com.sametozkan.storeapp.presentation.ViewModelFactory;
 import com.sametozkan.storeapp.presentation.category.CategoryActivity;
 import com.sametozkan.storeapp.presentation.category.CategoryClickListener;
 import com.sametozkan.storeapp.presentation.home.adapter.ProductAdapter;
 import com.sametozkan.storeapp.util.Categories;
 import com.sametozkan.storeapp.util.IntentConstants;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -36,6 +40,8 @@ public class HomeFragment extends Fragment implements CategoryClickListener {
     ViewModelFactory viewModelFactory;
 
     private HomeViewModel homeViewModel;
+
+    private final Map<Categories, ItemCategoryBinding> bindingMap = new HashMap<>();
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -57,49 +63,28 @@ public class HomeFragment extends Fragment implements CategoryClickListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setMensClothing();
-        setWomensClothing();
-        setJewelery();
-        setElectronics();
+        initBindingMap();
+        for(Categories category : homeViewModel.getSelectedCategories()){
+            setCategory(category, bindingMap.get(category));
+        }
     }
 
-    private void setMensClothing() {
-        binding.mensClothing.setCategoryName(Categories.MENS_CLOTHING.categoryTitle);
-        binding.mensClothing.setAdapter(new ProductAdapter(getContext()));
+    private void initBindingMap(){
+        bindingMap.put(Categories.MENS_CLOTHING, binding.mensClothing);
+        bindingMap.put(Categories.WOMENS_CLOTHING, binding.womensClothing);
+        bindingMap.put(Categories.JEWELERY, binding.jewelery);
+        bindingMap.put(Categories.ELECTRONICS, binding.electronics);
     }
 
-    private void setWomensClothing() {
-        binding.womensClothing.setCategoryName(Categories.WOMENS_CLOTHING.categoryTitle);
-        binding.womensClothing.setAdapter(new ProductAdapter(getContext()));
-    }
-
-    private void setJewelery() {
-        binding.jewelery.setCategoryName(Categories.JEWELERY.categoryTitle);
-        binding.jewelery.setAdapter(new ProductAdapter(getContext()));
-    }
-
-    private void setElectronics() {
-        binding.electronics.setCategoryName(Categories.ELECTRONICS.categoryTitle);
-        binding.electronics.setAdapter(new ProductAdapter(getContext()));
+    private void setCategory(Categories category, ItemCategoryBinding binding){
+        binding.setCategory(category);
+        binding.setAdapter(new ProductAdapter(getContext()));
     }
 
     @Override
-    public void onCategoryClicked(String categoryName) {
-        final Intent intent = new Intent(getContext(), CategoryActivity.class);
-        if (categoryName.equals(Categories.MENS_CLOTHING.categoryTitle)) {
-            intent.putExtra(IntentConstants.CATEGORY, Categories.MENS_CLOTHING.category);
-            startActivity(intent);
-        } else if (categoryName.equals(Categories.WOMENS_CLOTHING.categoryTitle)) {
-            intent.putExtra(IntentConstants.CATEGORY, Categories.WOMENS_CLOTHING.category);
-            startActivity(intent);
-        } else if (categoryName.equals(Categories.JEWELERY.categoryTitle)) {
-            intent.putExtra(IntentConstants.CATEGORY, Categories.JEWELERY.category);
-            startActivity(intent);
-        } else if (categoryName.equals(Categories.ELECTRONICS.categoryTitle)) {
-            intent.putExtra(IntentConstants.CATEGORY, Categories.ELECTRONICS.category);
-            startActivity(intent);
-        } else {
-            Log.e(TAG, "onCategoryClicked: Invalid category!", new IllegalArgumentException());
-        }
+    public void onCategoryClicked(Categories category) {
+        Intent intent = new Intent(getContext(), CategoryActivity.class);
+        intent.putExtra(IntentConstants.CATEGORY, category);
+        startActivity(intent);
     }
 }

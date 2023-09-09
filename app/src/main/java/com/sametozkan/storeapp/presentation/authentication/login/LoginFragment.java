@@ -55,7 +55,7 @@ public class LoginFragment extends Fragment {
     }
 
     private void setCreateAccountButtonClickListener() {
-        binding.createAccount.setOnClickListener(view -> {
+        binding.register.setOnClickListener(view -> {
             authClickListener.onCreateAccountButtonClicked();
         });
     }

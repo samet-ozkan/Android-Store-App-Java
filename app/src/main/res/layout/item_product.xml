@@ -14,20 +14,21 @@
             type="com.sametozkan.storeapp.presentation.home.adapter.ProductClickListener" />
     </data>
 
-<androidx.cardview.widget.CardView
-    android:layout_width="200dp"
-    android:layout_height="200dp"
-    android:onClick="@{() -> clickListener.onProductClicked(product)}">
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="200dp"
+        android:layout_height="230dp"
+        android:background="@drawable/background_item"
+        android:elevation="4dp"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:onClick="@{() -> clickListener.onProductClicked(product)}">
 
         <ImageView
             android:id="@+id/productImage"
             android:layout_width="100dp"
             android:layout_height="100dp"
             app:imageUrl="@{product.image}"
+            android:layout_margin="5dp"
             tools:src="@drawable/ic_launcher_background"
             app:layout_constraintBottom_toTopOf="@+id/starRate"
             app:layout_constraintEnd_toEndOf="parent"
@@ -60,13 +61,15 @@
 
         <TextView
             android:id="@+id/productName"
-            style="@style/Title"
+            style="@style/Text"
+            android:textStyle="bold"
             tools:text="Product Title"
-            android:padding="2dp"
+            android:padding="5dp"
+            android:layout_margin="5dp"
             android:maxLines="2"
             android:gravity="center"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:ellipsize="end"
             android:text="@{product.title}"
             app:layout_constraintBottom_toTopOf="@id/price"
@@ -80,6 +83,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="$35.66"
+            android:textStyle="bold"
             android:text="@{`$` + String.valueOf(product.price)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -89,7 +93,5 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-</androidx.cardview.widget.CardView>
 
 </layout>

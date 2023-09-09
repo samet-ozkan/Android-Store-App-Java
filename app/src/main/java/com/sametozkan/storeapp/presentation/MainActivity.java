@@ -52,24 +52,33 @@ public class MainActivity extends AppCompatActivity {
         ((MyApplication) getApplication()).getAppComponent().inject(this);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         setViewModel();
-        setToolbar();
         setNavigationDrawer();
         setNavigationViewHeader();
+        initFrameLayout();
+    }
+
+    private void initFrameLayout(){
         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new HomeFragment()).commit();
+        binding.toolbarTitle.setText("Home");
     }
 
     private void setViewModel() {
         viewModel = new ViewModelProvider(this, viewModelFactory).get(MainActivityViewModel.class);
     }
 
-    private void setToolbar() {
+    /*private void setToolbar() {
         setSupportActionBar(binding.toolbar);
-    }
+    }*/
 
     private void setNavigationDrawer() {
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, binding.drawerLayout, binding.toolbar, R.string.open_drawer, R.string.close_drawer);
+        binding.toolbar.setNavigationIcon(R.drawable.baseline_dehaze_24);
+        /*actionBarDrawerToggle = new ActionBarDrawerToggle(this, binding.drawerLayout, binding.toolbar, R.string.open_drawer, R.string.close_drawer);
         actionBarDrawerToggle.syncState();
-        binding.drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.setDrawerIndicatorEnabled(false);
+        binding.drawerLayout.addDrawerListener(actionBarDrawerToggle);*/
+        binding.toolbar.setNavigationOnClickListener(view -> {
+            binding.drawerLayout.open();
+        });
         setNavigationItemClickListener();
     }
 
@@ -77,22 +86,28 @@ public class MainActivity extends AppCompatActivity {
         binding.navigationView.setNavigationItemSelectedListener(item -> {
             final int itemId = item.getItemId();
             Fragment fragment;
+            String title;
             if (itemId == R.id.home) {
                 fragment = new HomeFragment();
+                title = "Home";
                 Log.d(TAG, "onCreate: Home clicked!");
             } else if (itemId == R.id.categories) {
                 fragment = new CategoryListFragment();
+                title = "Categories";
                 Log.d(TAG, "onCreate: Categories clicked!");
             } else if (itemId == R.id.shoppingCart) {
                 fragment = new ShoppingCartFragment();
+                title = "Shopping Cart";
                 Log.d(TAG, "setNavigationItemClickListener: ShoppingCart clicked!");
             } else if (itemId == R.id.pastOrders) {
                 fragment = new PastOrdersFragment();
+                title = "Past Orders";
                 Log.d(TAG, "setNavigationItemClickListener: PastOrders clicked!");
             } else {
                 return false;
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment).commit();
+            binding.toolbarTitle.setText(title);
             binding.drawerLayout.closeDrawers();
             return true;
         });

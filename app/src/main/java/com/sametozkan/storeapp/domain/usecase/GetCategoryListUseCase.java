@@ -1,6 +1,8 @@
 package com.sametozkan.storeapp.domain.usecase;
 
+import com.sametozkan.storeapp.data.mapper.CategoryListMapper;
 import com.sametozkan.storeapp.domain.repository.CategoryRepository;
+import com.sametozkan.storeapp.util.Categories;
 
 import java.util.List;
 

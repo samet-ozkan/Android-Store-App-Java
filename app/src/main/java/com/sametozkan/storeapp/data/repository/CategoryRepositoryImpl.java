@@ -4,7 +4,9 @@ import android.app.Application;
 
 import com.sametozkan.storeapp.MyApplication;
 import com.sametozkan.storeapp.data.datasource.remote.ApiService;
+import com.sametozkan.storeapp.data.mapper.CategoryListMapper;
 import com.sametozkan.storeapp.domain.repository.CategoryRepository;
+import com.sametozkan.storeapp.util.Categories;
 
 import java.util.List;
 

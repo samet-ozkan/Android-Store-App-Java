@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="categoryName"
-            type="java.lang.String" />
+            name="category"
+            type="com.sametozkan.storeapp.util.Categories" />
 
         <variable
             name="categoryClickListener"
@@ -15,35 +15,33 @@
 
     </data>
 
-    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/purple_200"
-        app:cardCornerRadius="25dp">
-
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="@{() -> categoryClickListener.onCategoryClicked(categoryName)}"
+            android:background="@drawable/background_item"
+            android:elevation="4dp"
+            android:layout_margin="10dp"
+            android:onClick="@{() -> categoryClickListener.onCategoryClicked(category)}"
             android:orientation="horizontal"
             android:padding="10dp">
 
             <TextView
+                android:paddingHorizontal="10dp"
                 android:id="@+id/categoryName"
                 style="@style/Title"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
-                android:text="@{categoryName}"
+                android:text="@{category.categoryTitle}"
                 tools:text="Category Name" />
 
             <ImageView
                 android:id="@+id/arrowForward"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:src="@drawable/baseline_arrow_forward_24" />
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
 </layout>

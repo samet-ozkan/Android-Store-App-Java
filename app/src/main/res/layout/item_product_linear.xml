@@ -21,9 +21,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:layout_margin="10dp"
+        android:background="@drawable/background_item"
+        android:elevation="4dp"
         android:onClick="@{() -> itemClickListener.onProductClicked(product)}"
         android:orientation="horizontal"
-        android:padding="5dp">
+        android:padding="10dp">
 
         <ImageView
             android:id="@+id/productImage"
@@ -39,7 +42,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="3"
+            android:layout_weight="7"
             android:orientation="vertical">
 
             <TextView
@@ -47,17 +50,22 @@
                 style="@style/Title"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:paddingHorizontal="10dp"
                 android:layout_weight="1"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:text="@{product.title}"
                 tools:text="Title" />
 
             <TextView
                 android:id="@+id/productDescription"
                 style="@style/Text"
+                android:paddingHorizontal="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:maxLines="1"
+                android:ellipsize="end"
                 android:text="@{product.description}"
                 tools:text="Description" />
 

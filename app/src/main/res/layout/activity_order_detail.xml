@@ -6,8 +6,9 @@
 
     <data>
 
-        <import type="com.sametozkan.storeapp.util.States"/>
-        <import type="android.view.View"/>
+        <import type="com.sametozkan.storeapp.util.States" />
+
+        <import type="android.view.View" />
 
         <variable
             name="viewModel"
@@ -19,58 +20,107 @@
 
     </data>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/view"
-            android:visibility="@{(viewModel.state == States.SUCCESS) ? View.VISIBLE : View.GONE}"
-            android:orientation="vertical">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/productsRv"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.9"
-                android:orientation="vertical"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:setAdapter="@{adapter}"
-                app:submitList="@{viewModel.productList}"
-                tools:listitem="@layout/item_product_linear" />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            style="@style/Toolbar">
 
             <TextView
-                android:id="@+id/totalAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 style="@style/Title"
-                android:layout_width="match_parent"
+                android:text="Order Detail"
+                android:layout_gravity="center"
+                android:id="@+id/toolbarTitle"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.05"
-                android:gravity="center"
-                android:text="@{`$` + String.valueOf(viewModel.order.totalAmount)}"
-                tools:text="$999.99" />
+                android:src="@drawable/baseline_arrow_back_24"
+                android:id="@+id/close"/>
 
-            <TextView
-                android:id="@+id/date"
-                style="@style/Text"
+        </androidx.appcompat.widget.Toolbar>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/view"
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:orientation="vertical"
+                android:visibility="@{(viewModel.state == States.SUCCESS) ? View.VISIBLE : View.GONE}">
+
+                <TextView
+                    android:id="@+id/totalAmount"
+                    style="@style/TextBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.03"
+                    android:gravity="left|center"
+                    android:layout_margin="10dp"
+                    android:textStyle="bold"
+                    android:paddingHorizontal="10dp"
+                    android:text="@{`Order Total: $` + String.valueOf(viewModel.order.totalAmount)}"
+                    tools:text="Order Total: $999.99" />
+
+                <TextView
+                    android:id="@+id/date"
+                    android:textStyle="bold"
+                    android:layout_margin="10dp"
+                    style="@style/TextBackground"
+                    android:paddingHorizontal="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.03"
+                    android:gravity="left|center"
+                    android:text="@{`Order Date: ` + viewModel.order.date}"
+                    tools:text="Order Date: 27 Jun 2023" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.01"
+                    android:textColor="@color/white"
+                    android:text="Products"
+                    android:gravity="center"
+                    android:layout_marginHorizontal="10dp"
+                    style="@style/TitleBackground"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/productsRv"
+                    android:layout_margin="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.9"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:setAdapter="@{adapter}"
+                    app:submitList="@{viewModel.productList}"
+                    tools:listitem="@layout/item_product_linear" />
+
+            </LinearLayout>
+
+            <include
+                android:id="@+id/states"
+                layout="@layout/states"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.05"
-                android:gravity="center"
-                android:text="@{viewModel.order.date}"
-                tools:text="27 Jun 2023" />
-        </LinearLayout>
+                android:layout_centerInParent="true"
+                app:state="@{viewModel.state}" />
 
-        <include
-            layout="@layout/states"
-            android:id="@+id/states"
-            app:state="@{viewModel.state}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true" />
+        </RelativeLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 
 </layout>

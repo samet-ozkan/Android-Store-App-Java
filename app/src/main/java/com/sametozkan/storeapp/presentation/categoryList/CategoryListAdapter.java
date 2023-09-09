@@ -14,23 +14,24 @@ import com.sametozkan.storeapp.databinding.ItemCategoryListBinding;
 import com.sametozkan.storeapp.presentation.category.CategoryActivity;
 import com.sametozkan.storeapp.presentation.category.CategoryClickListener;
 import com.sametozkan.storeapp.util.BindingAdapter;
+import com.sametozkan.storeapp.util.Categories;
 import com.sametozkan.storeapp.util.IntentConstants;
 import com.sametozkan.storeapp.util.ListAdapter;
 
 import java.util.List;
 
 public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapter.ViewHolder>
-implements ListAdapter {
+        implements ListAdapter {
 
     private Context context;
 
-    private List<String> categoryList;
+    private List<Categories> categoryList;
 
-    public List<String> getCategoryList() {
+    public List<Categories> getCategoryList() {
         return categoryList;
     }
 
-    public void setCategoryList(List<String> categoryList) {
+    public void setCategoryList(List<Categories> categoryList) {
         this.categoryList = categoryList;
         notifyDataSetChanged();
     }
@@ -72,15 +73,15 @@ implements ListAdapter {
             this.binding = binding;
         }
 
-        public void bindItem(String categoryName) {
-            binding.setCategoryName(categoryName);
+        public void bindItem(Categories category) {
+            binding.setCategory(category);
             binding.setCategoryClickListener(this);
         }
 
         @Override
-        public void onCategoryClicked(String categoryName) {
+        public void onCategoryClicked(Categories category) {
             final Intent intent = new Intent(context, CategoryActivity.class);
-            intent.putExtra(IntentConstants.CATEGORY, categoryName);
+            intent.putExtra(IntentConstants.CATEGORY, category);
             context.startActivity(intent);
         }
     }

@@ -26,6 +26,10 @@
             android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
             android:visibility="@{(viewModel.state == States.SUCCESS) ? View.VISIBLE : View.GONE}"
             android:orientation="vertical">
 

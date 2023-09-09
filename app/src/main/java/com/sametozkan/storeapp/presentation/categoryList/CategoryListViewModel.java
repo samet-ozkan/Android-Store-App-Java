@@ -6,7 +6,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.sametozkan.storeapp.data.mapper.CategoryListMapper;
 import com.sametozkan.storeapp.domain.usecase.GetCategoryListUseCase;
+import com.sametozkan.storeapp.util.Categories;
 import com.sametozkan.storeapp.util.States;
 
 import java.util.List;
@@ -23,7 +25,7 @@ public class CategoryListViewModel extends ViewModel {
 
     private CompositeDisposable disposable;
     private GetCategoryListUseCase getCategoryListUseCase;
-    private MutableLiveData<List<String>> categoryList = new MutableLiveData<>();
+    private MutableLiveData<List<Categories>> categoryList = new MutableLiveData<>();
     private MutableLiveData<States> state = new MutableLiveData<>(States.LOADING);
 
     @Inject
@@ -35,17 +37,19 @@ public class CategoryListViewModel extends ViewModel {
 
     public void fetchCategoryListUseCase() {
         disposable.add(getCategoryListUseCase.execute()
+                        .map(CategoryListMapper::toCategoryList)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe((strings, throwable) -> {
-                    categoryList.postValue(strings);
+                .subscribe((categories, throwable) -> {
+                    Log.d(TAG, "fetchCategoryListUseCase: " + categories);
+                    categoryList.postValue(categories);
                     state.postValue(States.SUCCESS);
                     if (throwable != null)
                         Log.e(TAG, "fetchCategoryListUseCase: ", throwable);
                 }));
     }
 
-    public LiveData<List<String>> getCategoryList() {
+    public LiveData<List<Categories>> getCategoryList() {
         return categoryList;
     }
 

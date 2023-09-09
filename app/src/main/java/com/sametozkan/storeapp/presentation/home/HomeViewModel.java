@@ -11,6 +11,7 @@ import com.sametozkan.storeapp.domain.usecase.GetLimitedProductsByCategoryUseCas
 import com.sametozkan.storeapp.util.Categories;
 import com.sametozkan.storeapp.util.States;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,12 +32,18 @@ public class HomeViewModel extends ViewModel {
     private final Map<Categories, MutableLiveData<States>> stateMap = new HashMap<>();
 
     private CompositeDisposable disposable;
+    private final Categories[] selectedCategories = {Categories.MENS_CLOTHING, Categories.WOMENS_CLOTHING, Categories.JEWELERY,
+            Categories.ELECTRONICS};
+
+    public Categories[] getSelectedCategories() {
+        return selectedCategories;
+    }
 
     @Inject
     public HomeViewModel(GetLimitedProductsByCategoryUseCase getLimitedProductsByCategoryUseCase) {
         this.getLimitedProductsByCategoryUseCase = getLimitedProductsByCategoryUseCase;
         disposable = new CompositeDisposable();
-        for (Categories category : Categories.values()) {
+        for (Categories category : selectedCategories) {
             categoryMap.put(category, new MutableLiveData<>());
             stateMap.put(category, new MutableLiveData<>(States.LOADING));
             fetchLimitedProductsByCategory(category, 5);

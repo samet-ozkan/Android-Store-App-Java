@@ -10,14 +10,15 @@
 
         <import type="com.sametozkan.storeapp.util.States"/>
         <import type="android.view.View"/>
+        <import type="com.sametozkan.storeapp.util.Categories"/>
 
         <variable
             name="state"
             type="States" />
 
         <variable
-            name="categoryName"
-            type="java.lang.String" />
+            name="category"
+            type="Categories" />
 
         <variable
             name="categoryClickListener"
@@ -40,8 +41,8 @@
 
         <LinearLayout
             android:id="@+id/header"
-            android:onClick="@{() -> categoryClickListener.onCategoryClicked(categoryName)}"
-            android:layout_margin="5dp"
+            android:onClick="@{() -> categoryClickListener.onCategoryClicked(category)}"
+            android:layout_marginVertical="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -49,10 +50,11 @@
             <TextView
                 android:id="@+id/categoryTitle"
                 style="@style/Title"
+                android:paddingHorizontal="10dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.9"
-                android:text="@{categoryName}"
+                android:text="@{category.categoryTitle}"
                 tools:text="Category Name" />
 
             <ImageView
@@ -71,6 +73,9 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/categoryRv"
                 android:layout_width="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
