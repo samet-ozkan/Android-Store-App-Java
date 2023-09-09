@@ -1,5 +1,6 @@
 package com.sametozkan.storeapp.presentation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -22,6 +23,7 @@ import com.sametozkan.storeapp.R;
 import com.sametozkan.storeapp.databinding.ActivityMainBinding;
 import com.sametozkan.storeapp.domain.model.User;
 import com.sametozkan.storeapp.domain.usecase.GetAllProductsUseCase;
+import com.sametozkan.storeapp.presentation.authentication.AuthActivity;
 import com.sametozkan.storeapp.presentation.categoryList.CategoryListFragment;
 import com.sametozkan.storeapp.presentation.home.HomeFragment;
 import com.sametozkan.storeapp.presentation.home.HomeViewModel;
@@ -38,8 +40,6 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
-
-    private ActionBarDrawerToggle actionBarDrawerToggle;
     private ActivityMainBinding binding;
     private MainActivityViewModel viewModel;
 
@@ -66,16 +66,8 @@ public class MainActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this, viewModelFactory).get(MainActivityViewModel.class);
     }
 
-    /*private void setToolbar() {
-        setSupportActionBar(binding.toolbar);
-    }*/
-
     private void setNavigationDrawer() {
         binding.toolbar.setNavigationIcon(R.drawable.baseline_dehaze_24);
-        /*actionBarDrawerToggle = new ActionBarDrawerToggle(this, binding.drawerLayout, binding.toolbar, R.string.open_drawer, R.string.close_drawer);
-        actionBarDrawerToggle.syncState();
-        actionBarDrawerToggle.setDrawerIndicatorEnabled(false);
-        binding.drawerLayout.addDrawerListener(actionBarDrawerToggle);*/
         binding.toolbar.setNavigationOnClickListener(view -> {
             binding.drawerLayout.open();
         });
@@ -85,32 +77,36 @@ public class MainActivity extends AppCompatActivity {
     private void setNavigationItemClickListener() {
         binding.navigationView.setNavigationItemSelectedListener(item -> {
             final int itemId = item.getItemId();
-            Fragment fragment;
-            String title;
             if (itemId == R.id.home) {
-                fragment = new HomeFragment();
-                title = "Home";
-                Log.d(TAG, "onCreate: Home clicked!");
+                replace(new HomeFragment(), "Home");
             } else if (itemId == R.id.categories) {
-                fragment = new CategoryListFragment();
-                title = "Categories";
-                Log.d(TAG, "onCreate: Categories clicked!");
+                replace(new CategoryListFragment(), "Categories");
             } else if (itemId == R.id.shoppingCart) {
-                fragment = new ShoppingCartFragment();
-                title = "Shopping Cart";
-                Log.d(TAG, "setNavigationItemClickListener: ShoppingCart clicked!");
+                replace(new ShoppingCartFragment(), "Shopping Cart");
             } else if (itemId == R.id.pastOrders) {
-                fragment = new PastOrdersFragment();
-                title = "Past Orders";
-                Log.d(TAG, "setNavigationItemClickListener: PastOrders clicked!");
-            } else {
+                replace(new PastOrdersFragment(), "Past Orders");
+            }
+            else if(itemId == R.id.logout){
+                logout();
+            }
+            else {
                 return false;
             }
-            getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment).commit();
-            binding.toolbarTitle.setText(title);
-            binding.drawerLayout.closeDrawers();
             return true;
         });
+    }
+
+    private void logout(){
+        viewModel.logout();
+        Intent intent = new Intent(this, AuthActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void replace(Fragment fragment, String title){
+        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment).commit();
+        binding.toolbarTitle.setText(title);
+        binding.drawerLayout.closeDrawers();
     }
 
     private void setNavigationViewHeader() {

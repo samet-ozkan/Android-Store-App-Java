@@ -42,6 +42,7 @@ public class RegisterFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setRegisterButtonClickListener();
+        loginButtonClickListener();
     }
 
     private void setRegisterButtonClickListener() {
@@ -50,6 +51,12 @@ public class RegisterFragment extends Fragment {
                     binding.fullName.getText().toString(),
                     binding.email.getText().toString(),
                     binding.password.getText().toString());
+        });
+    }
+
+    private void loginButtonClickListener(){
+        binding.login.setOnClickListener(view -> {
+            authClickListener.onLoginButtonClicked();
         });
     }
 

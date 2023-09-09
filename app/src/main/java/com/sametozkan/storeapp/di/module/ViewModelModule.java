@@ -12,6 +12,7 @@ import com.sametozkan.storeapp.domain.usecase.GetProductByIdUseCase;
 import com.sametozkan.storeapp.domain.usecase.GetProductListByIdsUseCase;
 import com.sametozkan.storeapp.domain.usecase.GetProductsByCategoryUseCase;
 import com.sametozkan.storeapp.domain.usecase.LoginUserUseCase;
+import com.sametozkan.storeapp.domain.usecase.LogoutUseCase;
 import com.sametozkan.storeapp.domain.usecase.RegisterUserUseCase;
 import com.sametozkan.storeapp.domain.usecase.SaveNewUserUseCase;
 import com.sametozkan.storeapp.presentation.MainActivityViewModel;
@@ -80,8 +81,8 @@ public class ViewModelModule {
     @IntoMap
     @ViewModelKey(AuthViewModel.class)
     ViewModel provideAuthViewModel(LoginUserUseCase loginUserUseCase, RegisterUserUseCase registerUserUseCase,
-                                   SaveNewUserUseCase saveNewUserUseCase) {
-        return new AuthViewModel(loginUserUseCase, registerUserUseCase, saveNewUserUseCase);
+                                   SaveNewUserUseCase saveNewUserUseCase, GetCurrentUserUseCase getCurrentUserUseCase) {
+        return new AuthViewModel(loginUserUseCase, registerUserUseCase, saveNewUserUseCase, getCurrentUserUseCase);
     }
 
     @Provides
@@ -94,8 +95,8 @@ public class ViewModelModule {
     @Provides
     @IntoMap
     @ViewModelKey(MainActivityViewModel.class)
-    ViewModel provideMainActivityViewModel(GetCurrentUserUseCase getCurrentUserUseCase) {
-        return new MainActivityViewModel(getCurrentUserUseCase);
+    ViewModel provideMainActivityViewModel(GetCurrentUserUseCase getCurrentUserUseCase, LogoutUseCase logoutUseCase) {
+        return new MainActivityViewModel(getCurrentUserUseCase, logoutUseCase);
     }
 
     @Provides

@@ -6,4 +6,6 @@ public interface AuthClickListener {
     void onRegisterButtonClicked(String fullName, String email, String password);
 
     void onCreateAccountButtonClicked();
+
+    void onLoginButtonClicked();
 }

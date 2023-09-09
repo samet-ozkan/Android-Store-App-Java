@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseUser;
 import com.sametozkan.storeapp.domain.model.User;
 import com.sametozkan.storeapp.domain.usecase.GetCurrentUserUseCase;
 import com.sametozkan.storeapp.domain.usecase.LoginUserUseCase;
@@ -18,12 +19,19 @@ public class AuthViewModel extends ViewModel {
     private RegisterUserUseCase registerUserUseCase;
     private SaveNewUserUseCase saveNewUserUseCase;
 
+    private GetCurrentUserUseCase getCurrentUserUseCase;
+
     @Inject
     public AuthViewModel(LoginUserUseCase loginUserUseCase, RegisterUserUseCase registerUserUseCase,
-                         SaveNewUserUseCase saveNewUserUseCase) {
+                         SaveNewUserUseCase saveNewUserUseCase, GetCurrentUserUseCase getCurrentUserUseCase) {
         this.loginUserUseCase = loginUserUseCase;
         this.registerUserUseCase = registerUserUseCase;
         this.saveNewUserUseCase = saveNewUserUseCase;
+        this.getCurrentUserUseCase = getCurrentUserUseCase;
+    }
+
+    public FirebaseUser getCurrentUser(){
+        return getCurrentUserUseCase.execute();
     }
 
     public void loginUser(String email, String password, OnCompleteListener<AuthResult> onCompleteListener) {

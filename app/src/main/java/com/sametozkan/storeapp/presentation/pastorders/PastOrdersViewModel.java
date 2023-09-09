@@ -40,12 +40,18 @@ public class PastOrdersViewModel extends ViewModel {
         getPastOrdersUseCase.execute(new Callback<List<Order>>() {
             @Override
             public void onSuccess(List<Order> result) {
-                pastOrders.postValue(result);
-                state.postValue(States.SUCCESS);
+                if (result.isEmpty()) {
+                    state.postValue(States.EMPTY);
+                } else {
+                    pastOrders.postValue(result);
+                    state.postValue(States.SUCCESS);
+                }
+
             }
 
             @Override
             public void onFailure(String errorMessage) {
+                state.postValue(States.ERROR);
                 Log.e(TAG, "onFailure: " + errorMessage);
             }
         });

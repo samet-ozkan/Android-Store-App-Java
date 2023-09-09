@@ -34,7 +34,14 @@ public class AuthActivity extends AppCompatActivity implements AuthClickListener
         setContentView(R.layout.activity_auth);
         ((MyApplication) getApplication()).getAppComponent().inject(this);
         authViewModel = new ViewModelProvider(this, viewModelFactory).get(AuthViewModel.class);
+        checkCurrentUser();
         openLoginFragment();
+    }
+
+    private void checkCurrentUser() {
+        if (authViewModel.getCurrentUser() != null) {
+            startMainActivity();
+        }
     }
 
     private void openLoginFragment() {
@@ -96,5 +103,10 @@ public class AuthActivity extends AppCompatActivity implements AuthClickListener
     public void onCreateAccountButtonClicked() {
         Log.d(TAG, "onCreateAccountButtonClicked: ");
         openRegisterFragment();
+    }
+
+    @Override
+    public void onLoginButtonClicked() {
+        openLoginFragment();
     }
 }
