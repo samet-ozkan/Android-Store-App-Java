@@ -20,7 +20,7 @@ Java (MVVM) Android mağaza uygulaması.
 
 
 
-https://github.com/samet-ozkan/Android-Store-App-Java/assets/55306181/9c8c9aa5-a4bc-41eb-9e94-3ae206481181
+https://github.com/samet-ozkan/Android-Store-App-Java/assets/55306181/6d30b0cc-1752-4ccc-ac21-3526bcd6031f
 
 
 
