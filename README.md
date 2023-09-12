@@ -15,6 +15,13 @@ Java (MVVM) Android mağaza uygulaması.
 
 
 ---
+
+## Uygulama Videosu
+
+
+https://github.com/samet-ozkan/Android-Store-App-Java/assets/55306181/2611b172-bf31-442e-83b0-f7b75765ca5d
+
+---
 ## Kullanılan Teknolojiler
 * Retrofit
 * Dagger2
