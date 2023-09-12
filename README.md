@@ -19,7 +19,10 @@ Java (MVVM) Android mağaza uygulaması.
 ## Uygulama Videosu
 
 
-https://github.com/samet-ozkan/Android-Store-App-Java/assets/55306181/2611b172-bf31-442e-83b0-f7b75765ca5d
+
+https://github.com/samet-ozkan/Android-Store-App-Java/assets/55306181/9c8c9aa5-a4bc-41eb-9e94-3ae206481181
+
+
 
 ---
 ## Kullanılan Teknolojiler
